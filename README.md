@@ -12,4 +12,35 @@
 // lets-do-some-3d _ github repository
 // Three js experiments and sandbox
 //
-``` 
+```
+
+
+10-print-3d-hypercube
+![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.png)
+
+bloom-line
+![thumbnail](./bloom-line/bloom-line.png)
+
+floating-fortress
+![thumbnail](./floating-fortress/floating-fortress.png)
+
+floating-obelisk
+![thumbnail](./floating-obelisk/floating-obelisk.png)
+
+astro-nascente
+![thumbnail](./astro-nascente/astro-nascente.png)
+
+giant-s-causeway-island
+![thumbnail](./giant-s-causeway-island/giant-s-causeway-island.png)
+
+giant-s-causeway-concept
+![thumbnail](./giant-s-causeway-concept/giant-s-causeway-concept.png)
+
+archived-first-tests/03-basic-template-effect-ascii
+![thumbnail](./archived-first-tests/03-basic-template-effect-ascii/03-basic-template-effect-ascii.png)
+
+archived-first-tests/02-basic-template-effect-raycasting
+![thumbnail](./archived-first-tests/02-basic-template-raycasting/02-basic-template-raycasting.png)
+
+archived-first-tests/01-basic-template
+![thumbnail](./archived-first-tests/01-basic-template/01-basic-template.png)
