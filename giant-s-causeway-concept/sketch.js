@@ -11,7 +11,7 @@
 // lets-do-some-3d _ github repository
 // Three js experiments and sandbox
 //
-// 05-giant-s-causeway (1st approach with three.js for the master thesis of @iretrtr)
+// giant-s-causeway-concept (1st approach with three.js for the master thesis of @iretrtr)
 
 let xAx = new THREE.Vector3( 1, 0, 0 );
 let yAx = new THREE.Vector3( 0, 1, 0 );

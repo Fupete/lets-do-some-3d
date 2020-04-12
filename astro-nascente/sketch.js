@@ -11,7 +11,7 @@
 // lets-do-some-3d _ github repository
 // Three js experiments and sandbox
 //
-// 04-astro-nascente (1st approach with three.js to render my allucinations)
+// astro-nascente (1st approach with three.js to render my allucinations)
 
 let xAx = new THREE.Vector3( 1, 0, 0 );
 let yAx = new THREE.Vector3( 0, 1, 0 );

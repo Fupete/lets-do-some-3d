@@ -11,9 +11,7 @@
 // lets-do-some-3d _ github repository
 // Three js experiments and sandbox
 //
-// 06-floating-obelisk (1st approach with three.js to render my allucinations)
-
-// © 2019 Daniele Tabellini @fupete, MIT License
+// floating-obelisk (1st approach with three.js to render my allucinations)
 
 /////////
 ///////// SETUP
