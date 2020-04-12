@@ -13,7 +13,11 @@
 // Three js experiments and sandbox
 //
 ```
+—
 
+[Github Repository](https://github.com/Fupete/lets-do-some-3d) | [Online](https://fupete.github.io/lets-do-some-3d/)
+
+—
 
 [10-print-3d-hypercube](./10-print-3d-hypercube)
 ![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.png)
