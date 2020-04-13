@@ -54,9 +54,13 @@
 ------
 
 ### Memo
-_Links and resources I want to check, eventually ;-)_ 
+_Links and resources I want to check, eventually ;-)_
 
-##### Read/Watch/Study
+##### Read
+- http://acko.net/tv/webglmath/
+- http://acko.net/blog/on-webgl/
+
+##### Watch/Study
 - https://threejsfundamentals.org/
 - https://discoverthreejs.com/
 - https://reactjsexample.com/react-fiber-renderer-for-three-js/
