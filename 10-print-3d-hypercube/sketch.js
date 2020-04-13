@@ -62,41 +62,42 @@ light.castShadow = true;
 light.receiveShadow = true;
 light.shadow.camera.near = 0.5;
 scene.add(light);
-// let dlh = new THREE.DirectionalLightHelper( light );
-// scene.add( dlh );
+// let dlight = new THREE.DirectionalLightHelper( light );
+// scene.add( dlight );
 
 // Point
 let light2 = new THREE.PointLight(0xeeeeee, 1.5);
 light2.position.set(0, 20, 0);
-// light2.castShadow = true;
+light2.castShadow = true;
 scene.add(light2);
-//let plh = new THREE.PointLightHelper( light2 );
-//scene.add( plh );
+// let plight2 = new THREE.PointLightHelper( light2 );
+// scene.add( plight2 );
 
 // Spot
 let light3 = new THREE.SpotLight(0xffffff, 2.7);
 light3.position.set(200, 400, 200);
 light3.angle = Math.PI / 7;
-// light3.penumbra = 0.8;
+light3.penumbra = 0.8;
 light3.castShadow = true;
 light3.receiveShadow = true;
-// light3.shadowCameraNear	= 0.5;
-// light3.shadowCameraVisible = true;
+light3.shadowCameraNear	= 0.5;
+light3.shadowCameraVisible = true;
 light3.shadow.mapSize.width = light3.shadow.mapSize.width = 4096;
 scene.add(light3);
-// let slh = new THREE.SpotLightHelper( light3 );
-// scene.add( slh );
+// let slight3 = new THREE.SpotLightHelper( light3 );
+// scene.add( slight3 );
 
-// let light4 = new THREE.SpotLight( 0xffffff, 2.7 );
-// light4.position.set (-200,400,-200);
-// light4.angle = Math.PI / 7;
-// light4.penumbra = 0.8;
-// light4.castShadow = true;
-// light4.receiveShadow = true;
-// light4.shadowDarkness = 0.35;
-// light4.shadowCameraNear	= 0.5;
-// scene.add(light4);
-
+let light4 = new THREE.SpotLight( 0xffffff, 2.7 );
+light4.position.set (-200,400,-200);
+light4.angle = Math.PI / 7;
+light4.penumbra = 0.8;
+light4.castShadow = true;
+light4.receiveShadow = true;
+light4.shadowDarkness = 0.35;
+light4.shadowCameraNear	= 0.5;
+scene.add(light4);
+// let slight4 = new THREE.SpotLightHelper( light4 );
+// scene.add( slight4 );
 
 /////////
 ///////// MATERIALS
@@ -105,9 +106,11 @@ scene.add(light3);
 let material = new THREE.MeshLambertMaterial({
   wireframe: false,
   color: 0xafafaf,
-  //specular: 0xffffff,
-  //shininess: 0.2,
-  // side: THREE.DoubleSide
+  specular: 0xffffff,
+  shininess: 0.2,
+  side: THREE.DoubleSide,
+  transparent: true,
+  opacity: 0.9
 }); // + material
 // Normal Lambert Phong Standard Toon
 
@@ -149,9 +152,10 @@ var materialLine = new THREE.LineBasicMaterial({
 
 let guiOptions = {
   REFRESH: function() { crea(); },
-  unit: 5, // < unit
-  grid: 3,
-  closedLines: true
+  unit: 10, // < unit
+  grid: 1,
+  closedLines: true,
+  drawMesh: false
 }
 
 let gui = new dat.GUI();
@@ -163,12 +167,15 @@ gui.add(guiOptions, 'grid', 1, 10, 1).onFinishChange(function() {
 });
 gui.add(guiOptions, 'closedLines').onChange(function() {
   riCreaGriglia()
-});;
+});
+gui.add(guiOptions, 'drawMesh').onChange(function() {
+  riCreaGriglia()
+});
 
 let u = guiOptions.unit; // < da passare a interfaccia XXX
 let g = guiOptions.grid;
 let closedLines = guiOptions.closedLines; // < per attivare r3, chiusura del triangolo
-
+let drawMesh = guiOptions.drawMesh;
 
 let r1, r2, r3; // r1 - r2 - r3 (per fare il triangolo...)
 let verticiCubo = []
@@ -182,6 +189,7 @@ function creaGriglia() {
   let u = guiOptions.unit; // < da passare a interfaccia XXX
   let g = guiOptions.grid;
   let closedLines = guiOptions.closedLines; // < per attivare r3, chiusura del triangolo
+  let drawMesh = guiOptions.drawMesh;
 
   // UNITA
   verticiCubo.push(new THREE.Vector3(0, 0, 0)) // 0 - 7 - 6
@@ -226,29 +234,45 @@ function creaGriglia() {
         let r2;
         if (r1 == 0) {
           r2 = 7;
-          if (closedLines) r3 = 6;
+          if (closedLines || drawMesh) r3 = 6;
         } else if (r1 == 1) {
           r2 = 4;
-          if (closedLines) r3 = 5;
+          if (closedLines || drawMesh) r3 = 5;
         } else if (r1 == 2) {
           r2 = 5;
-          if (closedLines) r3 = 1;
+          if (closedLines || drawMesh) r3 = 1;
         } else if (r1 == 3) {
           r2 = 6;
-          if (closedLines) r3 = 0;
+          if (closedLines || drawMesh) r3 = 0;
         }
-        var linea = new THREE.Geometry();
-        linea.vertices.push(verticiCubo[r1], verticiCubo[r2]);
-        if (closedLines) {
-          linea.vertices.push(verticiCubo[r2], verticiCubo[r3]);
-          linea.vertices.push(verticiCubo[r3], verticiCubo[r1]);
+
+        if (drawMesh) {
+          let contorno = new THREE.Geometry();
+          contorno.vertices.push(verticiCubo[r1], verticiCubo[r2], verticiCubo[r3]);
+          contorno.faces.push( new THREE.Face3( 0, 1, 2 ) );
+          // linea.computeBoundingSphere();
+          contorno.computeFaceNormals();
+          contorno.computeVertexNormals();
+          let faccia = new THREE.Mesh(contorno, material);
+          faccia.position.x = ix * u;
+          faccia.position.y = iy * u;
+          faccia.position.z = iz * u;
+          scene.add(faccia)
+          elementi10Print.push(faccia);
+        } else {
+          let linea = new THREE.Geometry();
+          linea.vertices.push(verticiCubo[r1], verticiCubo[r2]);
+          if (closedLines || drawMesh) {
+            linea.vertices.push(verticiCubo[r2], verticiCubo[r3]);
+            linea.vertices.push(verticiCubo[r3], verticiCubo[r1]);
+          }
+          var line = new THREE.Line(linea, materialLine);
+          line.position.x = ix * u;
+          line.position.y = iy * u;
+          line.position.z = iz * u;
+          scene.add(line);
+          elementi10Print.push(line);
         }
-        var line = new THREE.Line(linea, materialLine);
-        line.position.x = ix * u;
-        line.position.y = iy * u;
-        line.position.z = iz * u;
-        scene.add(line);
-        elementi10Print.push(line);
       }
     }
   }
@@ -281,10 +305,10 @@ let time = 0;
 let render = function() {
   requestAnimationFrame(render);
   //
-  light.position.x = Math.sin(time) * 150;
-  light.position.y = Math.cos(time) * 150;
-  light.position.z = Math.sin(time + 10) * 150;
-  time += 0.01;
+  // light.position.x = Math.sin(time) * 150;
+  // light.position.y = Math.cos(time) * 150;
+  // light.position.z = Math.sin(time + 10) * 150;
+  // time += 0.01;
   controls.update()
   renderer.render(scene, camera)
 };
