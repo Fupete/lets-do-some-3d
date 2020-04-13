@@ -50,3 +50,20 @@
 
 [archived-first-tests/01-basic-template](./archived-first-tests/01-basic-template)
 ![thumbnail](./archived-first-tests/01-basic-template/01-basic-template.png)
+
+------
+
+### Memo
+_Links and resources I want to check, eventually ;-)_ 
+
+##### Read/Watch/Study
+- https://threejsfundamentals.org/
+- https://discoverthreejs.com/
+- https://reactjsexample.com/react-fiber-renderer-for-three-js/
+- https://dustinpfister.github.io/2018/04/19/threejs-line/
+- https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/
+- https://codepen.io/vcomics/pen/KBMyjE
+- https://codepen.io/clockmaker/pen/gpozrX
+- https://codepen.io/zadvorsky/pen/vNVNYr
+-
+-
