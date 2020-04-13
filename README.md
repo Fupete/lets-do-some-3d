@@ -15,7 +15,7 @@
 ```
 -----
 
-[Github Repository](https://github.com/Fupete/lets-do-some-3d) | [Website](https://fupete.github.io/lets-do-some-3d/)
+[Github Repository](https://github.com/Fupete/lets-do-some-3d) | [Website](https://fupete.github.io/lets-do-some-3d/) | [License](https://github.com/Fupete/lets-do-some-3d/blob/master/LICENSE)
 
 -----
 
