@@ -45,7 +45,7 @@
 [archived-first-tests/03-basic-template-effect-ascii](./archived-first-tests/03-basic-template-effect-ascii)
 ![thumbnail](./archived-first-tests/03-basic-template-effect-ascii/03-basic-template-effect-ascii.png)
 
-[archived-first-tests/02-basic-template-effect-raycasting](./archived-first-tests/02-basic-template-effect-raycasting)
+[archived-first-tests/02-basic-template-effect-raycasting](./archived-first-tests/02-basic-template-raycasting)
 ![thumbnail](./archived-first-tests/02-basic-template-raycasting/02-basic-template-raycasting.png)
 
 [archived-first-tests/01-basic-template](./archived-first-tests/01-basic-template)
