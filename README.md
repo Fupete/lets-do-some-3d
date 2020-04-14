@@ -19,42 +19,55 @@
 
 -----
 
-#### 2020
-_Yeah yeah I know, soon_
+## 2020
+_I know I know, soon_
 
 -----
 
-#### 2019
+## 2019
 _Reverse order_
 
-[10-print-3d-hypercube](./10-print-3d-hypercube)  
+**[10-print-3d-hypercube &rarr;](./10-print-3d-hypercube)**
+
+Do you know the famous one-liner 10 Print for Commodore 64? And the incredible book about it by Nick Monfort & co.? Yeah, I use it and abuse it a lot on my advanced interaction design lab, and recently I started to imagine it in 3D. This is the 1st experiment.
+
 ![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.gif)
 
-[bloom-line](./bloom-line)
+**[bloom-line &rarr;](./bloom-line)**
+
 ![thumbnail](./bloom-line/bloom-line.png)
 
-[floating-fortress](./floating-fortress)
+
+**[floating-fortress &rarr;](./floating-fortress)**
+
 ![thumbnail](./floating-fortress/floating-fortress.png)
 
-[floating-obelisk](./floating-obelisk)
+**[floating-obelisk &rarr;](./floating-obelisk)**
+
 ![thumbnail](./floating-obelisk/floating-obelisk.png)
 
-[astro-nascente](./astro-nascente)
+**[astro-nascente &rarr;](./astro-nascente)**
+
 ![thumbnail](./astro-nascente/astro-nascente.png)
 
-[giant-s-causeway-island](./giant-s-causeway-island)
+**[giant-s-causeway-island &rarr;](./giant-s-causeway-island)**
+
 ![thumbnail](./giant-s-causeway-island/giant-s-causeway-island.png)
 
-[giant-s-causeway-concept](./giant-s-causeway-concept)
+**[giant-s-causeway-concept &rarr;](./giant-s-causeway-concept)**
+
 ![thumbnail](./giant-s-causeway-concept/giant-s-causeway-concept.png)
 
-[archived-first-tests/03-basic-template-effect-ascii](./archived-first-tests/03-basic-template-effect-ascii)
+**[archived-first-tests/03-basic-template-effect-ascii &rarr;](./archived-first-tests/03-basic-template-effect-ascii)**
+
 ![thumbnail](./archived-first-tests/03-basic-template-effect-ascii/03-basic-template-effect-ascii.png)
 
-[archived-first-tests/02-basic-template-raycasting](./archived-first-tests/02-basic-template-raycasting)
+**[archived-first-tests/02-basic-template-raycasting &rarr;](./archived-first-tests/02-basic-template-raycasting)**
+
 ![thumbnail](./archived-first-tests/02-basic-template-raycasting/02-basic-template-raycasting.png)
 
-[archived-first-tests/01-basic-template](./archived-first-tests/01-basic-template)
+**[archived-first-tests/01-basic-template &rarr;](./archived-first-tests/01-basic-template)**
+
 ![thumbnail](./archived-first-tests/01-basic-template/01-basic-template.png)
 
 ------
