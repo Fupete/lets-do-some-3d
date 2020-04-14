@@ -13,4 +13,4 @@
 // Three js experiments and sandbox
 //
 ```
-![thumbnail](./floating-fortress.png)
+![thumbnail](./floating-fortress.gif)

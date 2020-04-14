@@ -40,7 +40,7 @@ Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible
 
 **[floating-fortress &rarr;](./floating-fortress)**
 
-![thumbnail](./floating-fortress/floating-fortress.png)
+![thumbnail](./floating-fortress/floating-fortress.gif)
 
 **[floating-obelisk &rarr;](./floating-obelisk)**
 
