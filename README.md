@@ -29,7 +29,7 @@ _Reverse order_
 
 **[10-print-3d-hypercube &rarr;](./10-print-3d-hypercube)**
 
-Do you know the famous one-liner 10 Print for Commodore 64? And the incredible book about it by Nick Monfort & co.? Yeah, I use it and abuse it a lot on my advanced interaction design lab, and recently I started to imagine it in 3D. This is the 1st experiment.
+Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible book](https://10print.org/) about it by [Nick Monfort](https://nickm.com/) & friends? Yeah, I use it and abuse it the 1st day of each semester at my interaction design lab @unirsm since day one. Recently I started to imagine it in 3D, a complex hypercube, like a VR board game for _trekkers_. Well, this is the 1st experiment in that direction. 
 
 ![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.gif)
 
