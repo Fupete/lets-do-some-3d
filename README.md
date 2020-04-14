@@ -19,7 +19,8 @@
 
 -----
 
-# 2019
+#### 2019
+_Reverse order_
 
 [10-print-3d-hypercube](./10-print-3d-hypercube)
 ![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.png)
@@ -53,7 +54,7 @@
 
 ------
 
-### Memo
+#### Memo
 _Links and resources I want to check, eventually ;-)_
 
 ##### Read
@@ -69,5 +70,7 @@ _Links and resources I want to check, eventually ;-)_
 - https://codepen.io/vcomics/pen/KBMyjE
 - https://codepen.io/clockmaker/pen/gpozrX
 - https://codepen.io/zadvorsky/pen/vNVNYr
--
--
+
+------
+
+_Work in progress_
