@@ -31,16 +31,17 @@ _Reverse order_
 
 Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible book](https://10print.org/) about it by [Nick Monfort](https://nickm.com/) & friends? Yeah, I use it and abuse it the 1st day of each semester at my interaction design lab @unirsm since day one. Recently I started to imagine it in 3D, a complex hypercube, like a VR board game for _trekkers_. Well, this is the 1st experiment in that direction.
 
-![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.gif)
+<img src="./10-print-3d-hypercube/10-print-3d-hypercube.png" height=320> ![gif](./10-print-3d-hypercube/10-print-3d-hypercube.gif)
+
 
 **[bloom-line &rarr;](./bloom-line)**
 
-![thumbnail](./bloom-line/bloom-line.gif)
+<img src="./bloom-line/bloom-line.png" height=320> ![thumbnail](./bloom-line/bloom-line.gif)
 
 
 **[floating-fortress &rarr;](./floating-fortress)**
 
-![thumbnail](./floating-fortress/floating-fortress.gif)
+<img src="./floating-fortress/floating-fortress.png" height=320> ![thumbnail](./floating-fortress/floating-fortress.gif)
 
 **[floating-obelisk &rarr;](./floating-obelisk)**
 
