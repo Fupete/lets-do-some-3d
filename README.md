@@ -22,8 +22,8 @@
 #### 2019
 _Reverse order_
 
-[10-print-3d-hypercube](./10-print-3d-hypercube)
-![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.png)
+[10-print-3d-hypercube](./10-print-3d-hypercube)  
+![thumbnail](./10-print-3d-hypercube/10-print-3d-hypercube.gif)
 
 [bloom-line](./bloom-line)
 ![thumbnail](./bloom-line/bloom-line.png)
@@ -59,7 +59,7 @@ _Reverse order_
 #### _Ideas I want to explore, eventually ;-)_
 
 ##### New ones to explore
-- Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago... 
+- Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago...
 - Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah.
 - Machine learning and three js?
 - Responsive touchable UI opportunities... Oh I would love to see them
