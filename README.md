@@ -35,7 +35,7 @@ Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible
 
 **[bloom-line &rarr;](./bloom-line)**
 
-![thumbnail](./bloom-line/bloom-line.png)
+![thumbnail](./bloom-line/bloom-line.gif)
 
 
 **[floating-fortress &rarr;](./floating-fortress)**
