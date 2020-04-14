@@ -13,4 +13,4 @@
 // Three js experiments and sandbox
 //
 ```
-![thumbnail](./10-print-3d-hypercube.png)
+![thumbnail](./10-print-3d-hypercube.gif)
