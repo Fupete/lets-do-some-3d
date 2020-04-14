@@ -59,17 +59,18 @@ _Reverse order_
 #### _Ideas I want to explore, eventually ;-)_
 
 ##### New ones to explore
-- Character design/control for my "art puppets"
+- Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago... 
+- Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah.
 - Machine learning and three js?
-- Responsive UI opportunities
-- Physical dataviz
+- Responsive touchable UI opportunities... Oh I would love to see them
+- Physical VR/AR dataviz? | [the magical Dataphys list](http://dataphys.org/list/) | Can u imagine?
 
-##### Porting opportunities
-- Solid gradients/shapes, studies for Lcd Firenze, porting from Processing 3.0
-- Geo/Dataviz by me and Davide Onestini 2018, porting from Processing 3.0
-- Revolve experiments by me and Andrea Nico 2017, porting from Processing 3.0
-- Hate words are viruses 2016, Twitter visualizer for hate speech, by me and MCSotgiu, porting from Processing 3.0
-- My Fury 3D performative 3d drawing app 2016, porting from Processing 3.0
+##### Porting opportunities, ready to be approached
+- "Solid gradients/shapes", studies for Lcd Firenze, porting from Processing 3.0 | Yet to publish | GPL 3.0 License?  
+- "Geo/World dataviz of human rights", by me and Davide Onestini 2018, porting from Processing 3.0 | [Davide's concept](https://github.com/dsii-2017-unirsm/dsii-2017-archive/tree/master/davideonestini/making-visible) | [My OOP release with UI](https://github.com/dsii-2018-unirsm/archive/tree/master/2018/openday/opendayP3dOOP) | MIT License
+- "Revolve experiments" by me and Andrea Nico 2017, porting from Processing 3.0 | MIT License
+- "Hate words are viruses" 2016, Twitter visualizer for hate speech, by me and MCSotgiu, porting from Processing 3.0 | [MCSotgiu's concept](https://github.com/dsii-2016-unirsm/dsii-2016-archive/tree/master/MCSotgiu/Making-Visible) | MIT License
+- My "Fury 3D" performative 3d Leapmotion drawing app 2016, porting from Processing 3.0 | Yet to publish | GPL 3.0 License?
 
 
 #### _Links and resources I want to check, eventually ;-)_
