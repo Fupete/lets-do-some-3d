@@ -112,6 +112,9 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://codepen.io/vcomics/pen/KBMyjE](https://codepen.io/vcomics/pen/KBMyjE)
 - [https://codepen.io/clockmaker/pen/gpozrX](https://codepen.io/clockmaker/pen/gpozrX)
 - [https://codepen.io/zadvorsky/pen/vNVNYr](https://codepen.io/zadvorsky/pen/vNVNYr)
+- [https://github.com/sneha-belkhale/AI4Animation-js](https://github.com/sneha-belkhale/AI4Animation-js)
+- [https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02](https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02)
+- [https://github.com/nudibranchrecords/hedron](https://github.com/nudibranchrecords/hedron)
 - suggestions?
 
 ------
