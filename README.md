@@ -45,7 +45,7 @@ Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible
 
 **[floating-obelisk &rarr;](./floating-obelisk)**
 
-![thumbnail](./floating-obelisk/floating-obelisk.png)
+![thumbnail](./floating-obelisk/floating-obelisk-320.png) ![thumbnail](./floating-obelisk/floating-obelisk.gif)
 
 **[astro-nascente &rarr;](./astro-nascente)**
 
