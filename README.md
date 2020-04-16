@@ -117,6 +117,11 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://github.com/nudibranchrecords/hedron](https://github.com/nudibranchrecords/hedron)
 - suggestions?
 
+##### Physics engines for three.js
+- [https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10](https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10)
+- [https://github.com/Aqro/Physics-menu-threejs-cannonjs](https://github.com/Aqro/Physics-menu-threejs-cannonjs)
+- suggestions?
+
 ------
 
 _Work in progress / Follow me on [@fupete](https://twitter.com/fupete)
