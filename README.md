@@ -83,7 +83,7 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 
 ##### New ones to explore
 - Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago... update / found: [http://jaanga.github.io/gestification-r3/](http://jaanga.github.io/gestification-r3/)
-- Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah.
+- Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah. update / found: interesting stuff about _grease pencil_ [https://twitter.com/dedouze_/status/1250124156802404355](https://twitter.com/dedouze_/status/1250124156802404355) [https://twitter.com/_pepeland_/status/1250146895957237761](https://twitter.com/_pepeland_/status/1250146895957237761)
 - Machine learning and three js?
 - Responsive touchable UI opportunities... Oh I would love to see them
 - Physical VR/AR dataviz? / [the magical Dataphys list](http://dataphys.org/list/) / Can u imagine?
