@@ -22,7 +22,7 @@
 ## 2020
 _I know I know, soon more_
 
-**[noise-bubbles &arr;](./noise-bubbles)**
+**[noise-bubbles &tarr;](./noise-bubbles)**
 
 ![thumb](./noise-bubbles/noise-bubbles.png)
 
