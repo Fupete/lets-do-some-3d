@@ -86,8 +86,8 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 #### _Ideas I want to explore, eventually ;-)_
 
 ##### New ones to explore
-- Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago...
-- Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah.
+- Leapmotion and Threejs, what could be so damn different from programming in Processing three years ago... update / found: [http://jaanga.github.io/gestification-r3/](http://jaanga.github.io/gestification-r3/)
+- Character design/control for our [Teller&k](https://tellerk.com)'s' "art puppets" and drawings... Do I need Blender too? Yeah. update / found: interesting stuff about _grease pencil_ [https://twitter.com/dedouze_/status/1250124156802404355](https://twitter.com/dedouze_/status/1250124156802404355) [https://twitter.com/_pepeland_/status/1250146895957237761](https://twitter.com/_pepeland_/status/1250146895957237761)
 - Machine learning and three js?
 - Responsive touchable UI opportunities... Oh I would love to see them
 - Physical VR/AR dataviz? / [the magical Dataphys list](http://dataphys.org/list/) / Can u imagine?
@@ -119,6 +119,11 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://github.com/sneha-belkhale/AI4Animation-js](https://github.com/sneha-belkhale/AI4Animation-js)
 - [https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02](https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02)
 - [https://github.com/nudibranchrecords/hedron](https://github.com/nudibranchrecords/hedron)
+- suggestions?
+
+##### Physics engines for three.js
+- [https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10](https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10)
+- [https://github.com/Aqro/Physics-menu-threejs-cannonjs](https://github.com/Aqro/Physics-menu-threejs-cannonjs)
 - suggestions?
 
 ------
