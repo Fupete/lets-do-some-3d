@@ -24,7 +24,7 @@ _I know I know, soon more_
 
 **[noise-bubbles &rarr;](./noise-bubbles)**
 
-![thumb](./noise-bubbles/noise-bubbles.png)
+![thumb](./noise-bubbles/noise-bubbles-.png)
 
 -----
 

@@ -13,4 +13,4 @@
 // Three js experiments and sandbox
 //
 ```
-![thumbnail](./noise-bubbles.png)
+![thumbnail](./noise-bubbles-.png)
