@@ -20,7 +20,7 @@
 // Scene
 let scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
-scene.fog = new THREE.FogExp2(new THREE.Color(0xf0f0f0), 0.001);
+scene.fog = new THREE.FogExp2(new THREE.Color(0xffffff), 0.005);
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight;
@@ -94,13 +94,20 @@ scene.add(light3);
 ///////// MATERIALS
 /////////
 
+// var cubeMat = new THREE.MeshStandardMaterial({envMap: textureCube, roughness: 0.5, metalness: 1});
+
+// var cubeGeo = new THREE.BoxGeometry(2, 2, 2, 10, 10, 10);
+// var smooth = cubeGeo.clone();
+// var modifier = new THREE.SubdivisionModifier(3);
+// modifier.modify(smooth);
+// cubeGeo = smooth;
+//
+// cubeGeo.computeVertexNormals();
+
 let material = new THREE.MeshStandardMaterial({
   color: 0x676767,
-  specular: 0xfafafa,
-  shininess: 0.3,
-  // side: THREE.DoubleSide,
-  // transparent: true,
-  // opacity: 0.4
+  roughness: 0.5,
+  metalness: 1,
 }) // + material
 // Normal Lambert Phong Standard Toon
 
@@ -110,62 +117,114 @@ let material = new THREE.MeshStandardMaterial({
 
 let guiOptions = {
   // REFRESH: function() { crea(); },
-  mondo: 10,
-  noSfere: 10
+  worldSize: 10,
+  elementsNo: 10,
+  elementsType: 'A',
+  minSpeed: 0.0005,
+  maxSpeed: 0.0035,
+  style: 'A',
+  normalSize: 2,
+  maxScale: 1
 }
 
 let gui = new dat.GUI();
-gui.add(guiOptions, 'mondo', 1, 300, 1).onFinishChange(function() {
+
+gui.add(guiOptions, 'worldSize', 1, 300, 1).onFinishChange(function() {
   riCrea()
 });
-gui.add(guiOptions, 'noSfere', 1, 2000, 1).onFinishChange(function() {
+gui.add(guiOptions, 'elementsNo', 1, 2000, 1).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'elementsType', { Cubes: 'A', Astro: 'B', Spheres: 'C' }).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'minSpeed', 0.0005, 0.001, 0.00005).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'maxSpeed', 0.0010, 0.01, 0.0005).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'normalSize', 1, 10, 1).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'maxScale', 1, 10, 1).onFinishChange(function() {
+  riCrea()
+});
+gui.add(guiOptions, 'style', { Borg: 'A', Hippie: 'B'}).onFinishChange(function() {
   riCrea()
 });
 
-let mondo = guiOptions.mondo
-let noSfere = guiOptions.noSfere
-
-function riCrea() { // < per dat gui ...
-  for (let id=0; id<spheres.length; id++) {
-    scene.remove(spheres[id]);
-  }
-  t=[]
-  tincr=[]
-  spheres=[]
-  mondo = guiOptions.mondo
-  noSfere = guiOptions.noSfere
-  crea()
-}
+let worldSize = guiOptions.worldSize
+let elementsNo = guiOptions.elementsNo
+let minSpeed = guiOptions.minSpeed
+let maxSpeed = guiOptions.maxSpeed
+let normalSize = guiOptions.normalSize
+let maxScale = guiOptions.maxScale
 
 /////////
 ///////// GEOMETRIES
 /////////
 
-let geomSph = new THREE.SphereGeometry(2,18,18)
-let spheres = []
+let geomSph
+
+let elements = []
 let tis = []
 let tincr = []
 let colore = new THREE.Color( 0xffffff )
 
-crea()
-
 function crea() {
-  for(let id = 0; id < noSfere; id++){
-      // let colore = "0x" + Math.floor(Math.random()*16777215).toString(16)
-      colore.setHex( Math.random() * 0xffffff )
-      spheres[id] = new THREE.Mesh(geomSph, new THREE.MeshPhongMaterial({color: colore}))
-      scene.add(spheres[id])
+  let colorato = gui.__controllers[7].__select.selectedOptions[0].value
+  for(let id = 0; id < elementsNo; id++){
+      if (colorato === 'A') {
+        elements[id] = new THREE.Mesh(geomSph, material)
+      }
+      else {
+        colore.setHex( Math.random() * 0xffffff )
+        elements[id] = new THREE.Mesh(geomSph, new THREE.MeshPhongMaterial({color: colore}))
+      }
+      scene.add(elements[id])
       tis.push(id)
-      tincr.push(0.0005 + Math.random() * 0.003)
+      tincr.push(minSpeed + Math.random() * maxSpeed)
   }
 }
+
+function riCrea() { // < per dat gui ...
+  let type = gui.__controllers[2].__select.selectedOptions[0].value
+  if (type === 'A') { geomSph = new THREE.BoxGeometry(normalSize, normalSize, normalSize, 10, 10, 10) }
+  else if (type === 'B') { geomSph = new THREE.SphereGeometry(normalSize,1,1) }
+  else if (type === 'C') { geomSph = new THREE.SphereGeometry(normalSize,36,36) }
+  //
+  if (type === 'A') {
+    geomSph.computeVertexNormals();
+    var smooth = geomSph.clone();
+    var modifier = new THREE.SubdivisionModifier(3);
+    modifier.modify(smooth);
+    geomSph = smooth;
+  }
+  //
+  for (let id=0; id<elements.length; id++) {
+    scene.remove(elements[id]);
+  }
+  t=[]
+  tincr=[]
+  elements=[]
+  worldSize = guiOptions.worldSize
+  elementsNo = guiOptions.elementsNo
+  minSpeed = guiOptions.minSpeed
+  maxSpeed = guiOptions.maxSpeed
+  maxScale = guiOptions.maxScale
+  normalSize = guiOptions.normalSize
+  crea()
+}
+
+riCrea() // < let's start
 
 /////////
 ///////// SCENE/CAMERA
 /////////
 
 controls.target.set(0,0,0);
-camera.position.z = -4 * mondo;
+camera.position.z = -4 * worldSize;
 /////////
 ///////// RENDER/ANIMATION LOOP
 /////////
@@ -174,13 +233,13 @@ camera.position.z = -4 * mondo;
 let time = 0;
 let render = function() {
   requestAnimationFrame(render)
-  for(let id = 0; id < spheres.length; id++){
-    spheres[id].position.x = perlin.noise(tis[id], 0, 0) * mondo
-    spheres[id].position.y = perlin.noise(tis[id]+5, 0, 0) * mondo
-    spheres[id].position.z = perlin.noise(tis[id]+10, 0, 0) * mondo
-    spheres[id].scale.x = perlin.noise(tis[id]+15, 0, 0) + 1
-    spheres[id].scale.y = perlin.noise(tis[id]+15, 0, 0) + 1
-    spheres[id].scale.z = perlin.noise(tis[id]+15, 0, 0) + 1
+  for(let id = 0; id < elements.length; id++){
+    elements[id].position.x = perlin.noise(tis[id], 0, 0) * worldSize
+    elements[id].position.y = perlin.noise(tis[id]+5, 0, 0) * worldSize
+    elements[id].position.z = perlin.noise(tis[id]+10, 0, 0) * worldSize
+    elements[id].scale.x = perlin.noise(tis[id]+15, 0, 0) * maxScale + 1
+    elements[id].scale.y = perlin.noise(tis[id]+15, 0, 0) * maxScale + 1
+    elements[id].scale.z = perlin.noise(tis[id]+15, 0, 0) * maxScale + 1
     tis[id]+=tincr[id]
   }
   controls.update()
