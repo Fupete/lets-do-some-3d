@@ -10,7 +10,7 @@
 //                       
 // Daniele Tabellini @fupete © 2020 GNU General Public License v3.0
 // lets-do-some-3d _ github repository
-// Three js experiments and sandbox
+// Three js & webgl experiments and sandbox
 //
 ```
 -----
@@ -108,6 +108,8 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - suggestions?
 
 ##### Watch/Study/Hack
+- [https://webglfundamentals.org/](https://webglfundamentals.org/)
+- [https://webgl2fundamentals.org/](https://webgl2fundamentals.org/)
 - [https://threejsfundamentals.org/](https://threejsfundamentals.org/)
 - [https://discoverthreejs.com/](https://discoverthreejs.com/)
 - [https://reactjsexample.com/react-fiber-renderer-for-three-js/](https://reactjsexample.com/react-fiber-renderer-for-three-js/)
