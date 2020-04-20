@@ -19,6 +19,8 @@
 
 -----
 
+_I know, I am really a beginner, but continuing to learn new things is a way to nirvana these days :-)_
+
 ## 2020
 _Right now_
 
