@@ -20,9 +20,11 @@
 -----
 
 ## 2020
-_I know I know, soon more_
+_Right now_
 
 **[noise-bubbles-borg &rarr;](./noise-bubbles-borg)**
+
+I've spent this locked sunday afternoon playing with three js, perlin noise and the borg cube... I know, I know, no objects, no methods, and a bunch of old arrays... but it has been fun! ;-)
 
 ![thumb](./noise-bubbles-borg/noise-bubbles-borg.png)
 
