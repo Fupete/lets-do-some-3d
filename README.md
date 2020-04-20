@@ -24,6 +24,8 @@ _Right now_
 
 **[shadow-dance &rarr;](./shadow-dance)**
 
+A rainy monday afternoon dancing with shadows, Object3D and perlin noise. Strictly black and white.
+
 ![thumb](./shadow-dance/shadow-dance.png)
 
 
