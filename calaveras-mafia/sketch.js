@@ -102,7 +102,7 @@ let calaveraMate = new THREE.MeshLambertMaterial ( {
   emissive: 0xff0000,
   wireframe: true
 })
-loader.load( './assets/calavera.glb', function ( gltf ) {
+loader.load( './assets/calavera-processed.glb', function ( gltf ) {
   calavera = gltf.scene.children[0]
   console.log("calavera model loaded")
   calavera.position.set (0,20,0)
