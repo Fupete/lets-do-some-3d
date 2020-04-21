@@ -28,13 +28,13 @@ _Right now_
 
 A rainy monday afternoon dancing with shadows, Object3D and perlin noise. Strictly black and white.
 
-<img src="./shadow-dance/shadow-dance.png" height="320"/>
+![thumb](./shadow-dance/shadow-dance.png)
 
 **[noise-bubbles-borg &rarr;](./noise-bubbles-borg)**
 
 I've spent this locked sunday afternoon playing with three js, perlin noise and the borg cube... I know, I know, no objects, no methods, and a bunch of old arrays... but it has been fun! ;-)
 
-<img src="./noise-bubbles-borg/noise-bubbles-borg.png" height="320"/>
+![thumb](./noise-bubbles-borg/noise-bubbles-borg.png)
 
 -----
 
@@ -65,30 +65,29 @@ Do you know the famous oneliner "10 Print" for Commodore 64? And [the incredible
 
 I have always want to give physical dimensions and form to our art drawings and allucinations at  [Teller&k](https://tellerk.com/drawings). Here my astro-ship called "morning star"... that's the way, i like it.
 
-<img src="./astro-nascente/astro-nascente.png" height="320"/>
+![thumb](./astro-nascente/astro-nascente.png)
 
 **[giant-s-causeway-island &rarr;](./giant-s-causeway-island)**
 
 A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Digital cartography and ethnographic survey of online communities.](https://github.com/iretrtr/online-community-maps)"
 
-<img src="./giant-s-causeway-island/giant-s-causeway-island.png" height="320"/>
+![thumb](./giant-s-causeway-island/giant-s-causeway-island.png)
 
 **[giant-s-causeway-concept &rarr;](./giant-s-causeway-concept)**
 
-<img src="./giant-s-causeway-concept/giant-s-causeway-concept.png" height="320"/>
+![thumb](./giant-s-causeway-concept/giant-s-causeway-concept.png)
 
 **[archived-first-tests/03-basic-template-effect-ascii &rarr;](./archived-first-tests/03-basic-template-effect-ascii)**
 
-<img src="./archived-first-tests/03-basic-template-effect-ascii/03-basic-template-effect-ascii.png" height="320"/>
+![thumb](./archived-first-tests/03-basic-template-effect-ascii/03-basic-template-effect-ascii.png)
 
 **[archived-first-tests/02-basic-template-raycasting &rarr;](./archived-first-tests/02-basic-template-raycasting)**
 
-
-<img src="./archived-first-tests/02-basic-template-raycasting/02-basic-template-raycasting.png" height="320"/>
+![thumb](./archived-first-tests/02-basic-template-raycasting/02-basic-template-raycasting.png)
 
 **[archived-first-tests/01-basic-template &rarr;](./archived-first-tests/01-basic-template)**
 
-<img src="./archived-first-tests/01-basic-template/01-basic-template.png" height="320"/>
+![thumb](./archived-first-tests/01-basic-template/01-basic-template.png)
 
 ------
 
