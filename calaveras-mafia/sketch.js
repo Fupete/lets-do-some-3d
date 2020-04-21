@@ -94,7 +94,10 @@ ground.castShadow = false
 ground.receiveShadow = true
 scene.add(ground)
 
-var loader = new THREE.GLTFLoader()
+let loader = new THREE.GLTFLoader()
+let dracoLoader = new THREE.DRACOLoader()
+dracoLoader.setDecoderPath( 'https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/libs/draco/gltf/' )
+loader.setDRACOLoader( dracoLoader )
 
 let calavera
 let calaveraMate = new THREE.MeshLambertMaterial ( {
@@ -102,7 +105,9 @@ let calaveraMate = new THREE.MeshLambertMaterial ( {
   emissive: 0xff0000,
   wireframe: true
 })
-loader.load( './assets/calavera-processed.glb', function ( gltf ) {
+
+loader.load( './assets/calavera-processed.glb', function ( gltf ) { //XXX
+//loader.load( './assets/calavera.glb', function ( gltf ) {
   calavera = gltf.scene.children[0]
   console.log("calavera model loaded")
   calavera.position.set (0,20,0)
