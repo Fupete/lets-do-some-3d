@@ -24,6 +24,12 @@ _I know, I am really a beginner, but continuing to learn new things is a way to 
 ## 2020
 _Right now_
 
+**[calaveras-mafia &rarr;](./calaveras-mafia)**
+
+_Calaveras_ mean skulls in spanish. My first attempt at sculpt in blender, imported as gltf and staged in gray and pink. Yep.  
+
+![thumb](./calaveras-mafia/calaveras-mafia.png)
+
 **[shadow-dance &rarr;](./shadow-dance)**
 
 A rainy monday afternoon dancing with shadows, Object3D and perlin noise. Strictly black and white.
