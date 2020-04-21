@@ -132,9 +132,17 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://github.com/sneha-belkhale/AI4Animation-js](https://github.com/sneha-belkhale/AI4Animation-js)
 - [https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02](https://medium.com/huia/creating-an-interactive-artificial-intelligence-experience-in-the-browser-with-tensorflowjs-ea205ee08c02)
 - [https://github.com/nudibranchrecords/hedron](https://github.com/nudibranchrecords/hedron)
+- [https://medium.com/@matthewmain/how-to-import-a-3d-blender-object-into-a-three-js-project-as-a-gltf-file-5a67290f65f2](https://medium.com/@matthewmain/how-to-import-a-3d-blender-object-into-a-three-js-project-as-a-gltf-file-5a67290f65f2)
+- [https://codepen.io/matthewmain/pen/YJwoVy?editors=0010](https://codepen.io/matthewmain/pen/YJwoVy?editors=0010)
+- suggestions?
+
+##### Many examples
+- [https://threejs.org/examples/](https://threejs.org/examples/)
+- [https://hofk.de/main/discourse.threejs/](https://hofk.de/main/discourse.threejs/) [forum post](https://discourse.threejs.org/t/collection-of-examples-from-discourse-threejs-org/4315)
 - suggestions?
 
 ##### Physics engines for three.js
+- [https://chandlerprall.github.io/Physijs/](https://chandlerprall.github.io/Physijs/)
 - [https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10](https://discourse.threejs.org/t/preferred-physics-engine-cannon-js-ammo-js-diy/1565/10)
 - [https://github.com/Aqro/Physics-menu-threejs-cannonjs](https://github.com/Aqro/Physics-menu-threejs-cannonjs)
 - suggestions?
