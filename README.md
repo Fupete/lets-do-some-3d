@@ -128,6 +128,8 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://webgl2fundamentals.org/](https://webgl2fundamentals.org/)
 - [https://threejsfundamentals.org/](https://threejsfundamentals.org/)
 - [https://discoverthreejs.com/](https://discoverthreejs.com/)
+- [https://github.com/sketchpunk/FunWithWebGL2](https://github.com/sketchpunk/FunWithWebGL2)
+- [https://thebookofshaders.com/?lan=it](https://thebookofshaders.com/?lan=it)
 - [https://reactjsexample.com/react-fiber-renderer-for-three-js/](https://reactjsexample.com/react-fiber-renderer-for-three-js/)
 - [https://dustinpfister.github.io/2018/04/19/threejs-line/](https://dustinpfister.github.io/2018/04/19/threejs-line/)
 - [https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/](https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/)
