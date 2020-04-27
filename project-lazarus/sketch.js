@@ -45,7 +45,7 @@ let pRatio = window.devicePixelRatio;
 if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.shadowMap.enabled = true; // < Shadows enabled
+renderer.shadowMap.enabled = false; // < Shadows enabled
 renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
@@ -54,14 +54,14 @@ document.body.appendChild(renderer.domElement)
 // let composer, glitchPass
 
 // Orbit controls
-let controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
 controls.enableDamping = true;
 controls.dampingFactor = 0.19;
 
 // Utilities
-let perlin = new THREE.SimplexNoise()
-let clock = new THREE.Clock()
+const perlin = new THREE.SimplexNoise()
+const clock = new THREE.Clock()
 
 // Add listener for window resize.
 window.addEventListener('resize', onWindowResize, false)
