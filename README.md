@@ -134,6 +134,8 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://webgl2fundamentals.org/](https://webgl2fundamentals.org/)
 - [https://threejsfundamentals.org/](https://threejsfundamentals.org/)
 - [https://discoverthreejs.com/](https://discoverthreejs.com/)
+- [https://github.com/sketchpunk/FunWithWebGL2](https://github.com/sketchpunk/FunWithWebGL2)
+- [https://thebookofshaders.com/?lan=it](https://thebookofshaders.com/?lan=it)
 - [https://reactjsexample.com/react-fiber-renderer-for-three-js/](https://reactjsexample.com/react-fiber-renderer-for-three-js/)
 - [https://dustinpfister.github.io/2018/04/19/threejs-line/](https://dustinpfister.github.io/2018/04/19/threejs-line/)
 - [https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/](https://tympanus.net/codrops/2019/04/10/how-to-create-a-sticky-image-effect-with-three-js/)
@@ -145,6 +147,7 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://github.com/nudibranchrecords/hedron](https://github.com/nudibranchrecords/hedron)
 - [https://medium.com/@matthewmain/how-to-import-a-3d-blender-object-into-a-three-js-project-as-a-gltf-file-5a67290f65f2](https://medium.com/@matthewmain/how-to-import-a-3d-blender-object-into-a-three-js-project-as-a-gltf-file-5a67290f65f2)
 - [https://codepen.io/matthewmain/pen/YJwoVy?editors=0010](https://codepen.io/matthewmain/pen/YJwoVy?editors=0010)
+- [https://medium.com/@agm1984/how-to-rig-a-character-model-for-three-js-in-blender-846e258a9d9d](https://medium.com/@agm1984/how-to-rig-a-character-model-for-three-js-in-blender-846e258a9d9d)
 - suggestions?
 
 ##### Many examples
