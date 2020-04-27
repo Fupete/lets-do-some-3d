@@ -17,6 +17,12 @@
 ///////// SETUP + RENDER
 /////////
 
+// if ( WEBGL.isWebGL2Available() === false ) {
+//
+// 	document.body.appendChild( WEBGL.getWebGL2ErrorMessage() )
+//
+// }
+
 // Vars
 let near = 1, far = 1000, floor = 0
 let shadowMapWidth = 2048, shadowMapHeight = 2048
@@ -43,7 +49,7 @@ renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap 
 document.body.appendChild(renderer.domElement)
 
 // Post-Processing
-let composer, glitchPass
+// let composer, glitchPass
 
 // Orbit controls
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -167,11 +173,11 @@ camera.position.set( 0, floor+2, 7 )
 ///////// POST/PROCESSING
 /////////
 
-composer = new THREE.EffectComposer( renderer )
-composer.addPass( new THREE.RenderPass( scene, camera ) )
-
-glitchPass = new THREE.GlitchPass()
-composer.addPass( glitchPass )
+// composer = new THREE.EffectComposer( renderer )
+// composer.addPass( new THREE.RenderPass( scene, camera ) )
+//
+// glitchPass = new THREE.GlitchPass()
+// composer.addPass( glitchPass )
 
 /////////
 ///////// RENDER/ANIMATION LOOP
@@ -198,5 +204,5 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
-  composer.setSize( window.innerWidth, window.innerHeight )
+  // composer.setSize( window.innerWidth, window.innerHeight )
 }
