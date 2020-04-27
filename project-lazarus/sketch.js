@@ -42,6 +42,9 @@ renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap 
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
+// Post-Processing
+let composer, glitchPass
+
 // Orbit controls
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
@@ -164,6 +167,16 @@ controls.target.set(0,1.5,0)
 camera.position.set( 0, floor+2, 7 )
 
 /////////
+///////// POST/PROCESSING
+/////////
+
+composer = new THREE.EffectComposer( renderer )
+composer.addPass( new THREE.RenderPass( scene, camera ) )
+
+glitchPass = new THREE.GlitchPass()
+composer.addPass( glitchPass )
+
+/////////
 ///////// RENDER/ANIMATION LOOP
 /////////
 
@@ -175,7 +188,8 @@ let render = function() {
   let dt = clock.getDelta()
   if (mixer) mixer.update(dt);
   if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
-  renderer.render(scene, camera)
+  // renderer.render(scene, camera)
+  composer.render()
   time+=0.02
 };
 
@@ -187,5 +201,6 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
+  composer.setSize( window.innerWidth, window.innerHeight );
   controls.handleResize()
 }
