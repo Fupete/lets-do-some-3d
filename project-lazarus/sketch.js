@@ -169,7 +169,7 @@ function ( gltf ) { //XXX
       // // piece.material.roughtness = .5,
       // // piece.material.wireframe = true,
       piece.castShadow = true
-      piece.receiveShadow = true
+      // piece.receiveShadow = true
     }
   })
   mixer = new THREE.AnimationMixer(lazarus);
