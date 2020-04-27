@@ -41,7 +41,9 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true
 })
 renderer.toneMappingExposure = 1.2;
-renderer.setPixelRatio(window.devicePixelRatio)
+let pRatio = window.devicePixelRatio;
+if (pRatio > 2) pRatio = 2 // < not too much on mobile...
+renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true; // < Shadows enabled
 renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
