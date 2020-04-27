@@ -24,6 +24,12 @@ _I know, I am really a beginner, but continuing to learn new things is a way to 
 ## 2020
 _Right now_
 
+**[project-lazarus &rarr;](./project-lazarus)**
+
+_Work in progress... still a lot to do!_
+
+![thumb](./project-lazarus/project-lazarus.png)
+
 **[calaveras-mafia &rarr;](./calaveras-mafia)**
 
 _Calaveras_ mean skulls in spanish. My first attempt at sculpt in blender, imported as gltf and staged in gray and pink. Yep.  
