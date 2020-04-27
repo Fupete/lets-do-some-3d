@@ -119,11 +119,8 @@ const lazarusMate = new THREE.MeshStandardMaterial({
   color: 0xffffff,
   emissive: 0x000000,
   metalness:.5,
-  shininess: 0xffffff,
-  // shininess: 1,
   side: THREE.BackSide,
-  shadowSide: THREE.DoubleSide,
-  // shininess: 1
+  shadowSide: THREE.DoubleSide
 })
 
 loader.load( './assets/project-lazarus-processed.glb',
@@ -188,8 +185,8 @@ let render = function() {
   let dt = clock.getDelta()
   if (mixer) mixer.update(dt);
   if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
-  // renderer.render(scene, camera)
-  composer.render()
+  renderer.render(scene, camera)
+  // composer.render()
   time+=0.02
 };
 
@@ -201,6 +198,5 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
-  composer.setSize( window.innerWidth, window.innerHeight );
-  controls.handleResize()
+  composer.setSize( window.innerWidth, window.innerHeight )
 }
