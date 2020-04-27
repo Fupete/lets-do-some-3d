@@ -96,6 +96,27 @@ scene.add(lightFront2)
 // let dlh2 = new THREE.PointLightHelper( lightFront2 )
 // scene.add( dlh2 )
 
+let intensity = 1.5
+let distance = 2
+let decay = 2.0
+
+// let c1 = 0xff0040, c2 = 0x0040ff, c3 = 0x80ff80, c4 = 0xffaa00, c5 = 0x00ffaa, c6 = 0xff1100
+let c1 = c2 = c3 = c4 = c5 = c6 = 0xffffff
+
+let sphere = new THREE.SphereBufferGeometry( 0.02, 3, 3 );
+
+light1 = new THREE.PointLight( c1, intensity, distance, decay )
+light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c1 } ) ) )
+scene.add( light1 )
+
+light2 = new THREE.PointLight( c2, intensity, distance, decay )
+light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c2 } ) ) )
+scene.add( light2 )
+
+light3 = new THREE.PointLight( c3, intensity, distance, decay )
+light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c3 } ) ) )
+scene.add( light3 )
+
 
 
 
@@ -191,9 +212,22 @@ let render = function() {
   let dt = clock.getDelta()
   if (mixer) mixer.update(dt);
   if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
+
+  let d = 3
+  light1.position.x = perlin.noise( time * .4, 0, 0 ) * 3
+  light1.position.z = perlin.noise( time * .3 + 5, 0, 0 ) * 3
+  light1.position.y = perlin.noise( time * .5 + 10, 0, 0 ) * 4
+  light2.position.x = perlin.noise( time * .2 + 15, 0, 0 ) * 4
+  light2.position.z = perlin.noise( time * .5 + 20, 0, 0 ) * 4
+  light2.position.y = perlin.noise( time * .3 + 25, 0, 0 ) * 2
+  light3.position.x = perlin.noise( time * .2 + 30, 0, 0 ) * 3
+  light3.position.z = perlin.noise( time * .3 + 35, 0, 0 ) * 5
+  light3.position.y = perlin.noise( time * .4 + 40, 0, 0 ) * 2 + 1
+
+
   renderer.render(scene, camera)
   // composer.render()
-  time+=0.02
+  time+=0.015
 };
 
 // go
