@@ -139,7 +139,8 @@ scene.add(ground)
 
 let loader = new THREE.GLTFLoader()
 let dracoLoader = new THREE.DRACOLoader()
-dracoLoader.setDecoderPath( 'https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/libs/draco/gltf/' )
+dracoLoader.setDecoderPath( "https://www.gstatic.com/draco/v1/decoders/" )
+// dracoLoader.setDecoderPath( "https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/libs/draco/gltf/" )
 loader.setDRACOLoader( dracoLoader )
 
 let lazarus, mixer, clip1, action1
@@ -154,22 +155,14 @@ const lazarusMate = new THREE.MeshStandardMaterial({
 
 loader.load( './assets/project-lazarus-processed.glb',
 function ( gltf ) { //XXX
-//loader.load( './assets/calavera.glb', function ( gltf ) {
+  dracoLoader.dispose()
   lazarus = gltf.scene.children[0]
   console.log("lazarus model loaded")
   lazarus.position.set (0,1.95,0)
   lazarus.scale.set(1,1,1)
-  // lazarus.castShadow = true
-  // lazarus.receiveShadow = true
   lazarus.traverse((piece) => {
     if (piece.isMesh) {
       piece.material = lazarusMate
-      // console.log(piece.material)
-      // // piece.material.color = new THREE.Color( 0xffffff ),
-      // // piece.material.metalness = 0,
-      // // // piece.material.emissive = new THREE.Color ( 0x000000 ),
-      // // piece.material.roughtness = .5,
-      // // piece.material.wireframe = true,
       piece.castShadow = true
       // piece.receiveShadow = true
     }
