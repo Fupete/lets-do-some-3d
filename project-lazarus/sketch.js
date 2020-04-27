@@ -38,14 +38,13 @@ const camera = new THREE.PerspectiveCamera(35, aspect, near, far)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-  antialias: true
+  antialias: false
 })
-renderer.toneMappingExposure = 1.2;
-let pRatio = window.devicePixelRatio;
+let pRatio = window.devicePixelRatio
 if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.shadowMap.enabled = true; // < Shadows enabled
+renderer.shadowMap.enabled = true // < Shadows enabled
 renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
@@ -54,10 +53,10 @@ document.body.appendChild(renderer.domElement)
 // let composer, glitchPass
 
 // Orbit controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enablePan = false;
-controls.enableDamping = true;
-controls.dampingFactor = 0.19;
+const controls = new THREE.OrbitControls(camera, renderer.domElement)
+controls.enablePan = false
+controls.enableDamping = true
+controls.dampingFactor = 0.19
 
 // Utilities
 const perlin = new THREE.SimplexNoise()
@@ -105,7 +104,7 @@ let decay = 2.0
 // let c1 = 0xff0040, c2 = 0x0040ff, c3 = 0x80ff80, c4 = 0xffaa00, c5 = 0x00ffaa, c6 = 0xff1100
 let c1 = c2 = c3 = c4 = c5 = c6 = 0xffffff
 
-let sphere = new THREE.SphereBufferGeometry( 0.02, 3, 3 );
+let sphere = new THREE.SphereBufferGeometry( 0.02, 3, 3 )
 
 light1 = new THREE.PointLight( c1, intensity, distance, decay )
 light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: c1 } ) ) )
@@ -137,6 +136,7 @@ ground.castShadow = false
 ground.receiveShadow = true
 scene.add(ground)
 
+// let's load lazarus
 let loader = new THREE.GLTFLoader()
 let dracoLoader = new THREE.DRACOLoader()
 dracoLoader.setDecoderPath( "https://www.gstatic.com/draco/v1/decoders/" )
@@ -167,13 +167,13 @@ function ( gltf ) { //XXX
       // piece.receiveShadow = true
     }
   })
-  mixer = new THREE.AnimationMixer(lazarus);
+  mixer = new THREE.AnimationMixer(lazarus)
   clip1 = gltf.animations[0]
   action1 = mixer.clipAction(clip1)
   action1.play()
   scene.add( lazarus )
 }, function ( xhr ) {
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' )
 },  function ( error ) {
 	 console.error( error )
 } )
@@ -200,12 +200,13 @@ camera.position.set( 0, floor+2, 7 )
 /////////
 
 // set
-let time = 0;
+let time = 0
 let render = function() {
   requestAnimationFrame(render)
   controls.update()
+
   let dt = clock.getDelta()
-  if (mixer) mixer.update(dt);
+  if (mixer) mixer.update(dt)
   if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
 
   let d = 3
@@ -223,10 +224,10 @@ let render = function() {
   renderer.render(scene, camera)
   // composer.render()
   time+=0.015
-};
+}
 
 // go
-render();
+render()
 
 
 function onWindowResize() {
