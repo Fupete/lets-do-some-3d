@@ -19,12 +19,12 @@
 
 // Vars
 let near = 1, far = 1000, floor = 0
-let shadowMapWidth = 1024, shadowMapHeight = 1024
+let shadowMapWidth = 2048, shadowMapHeight = 2048
 
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x444444)
-scene.fog = new THREE.Fog( scene.background, 0, 50)
+scene.fog = new THREE.FogExp2( scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
@@ -38,7 +38,7 @@ renderer.toneMappingExposure = 1.2;
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true; // < Shadows enabled
-renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
+renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
@@ -65,43 +65,27 @@ let lightAmb = new THREE.AmbientLight( 0x444444 )
 scene.add(lightAmb)
 
 // Directional
-let lightS = new THREE.SpotLight( 0xffffff, 1, 0, Math.PI / 9, 0.2 )
-lightS.position.set( 10, 7, 7 )
-lightS.target.position.set(0,0,10)
-lightS.castShadow = true
-lightS.shadow.camera.near	= 1
-lightS.shadow.camera.far = 50
-// lightS.shadow.bias = -0.001
-lightS.shadow.mapSize.width = shadowMapWidth
-lightS.shadow.mapSize.height = shadowMapHeight
+let lightS = new THREE.SpotLight( 0xffffff, .7, 0, Math.PI / 10, .4 )
+lightS.position.set( 0, 14, -7 )
 scene.add(lightS)
 // let dlh = new THREE.DirectionalLightHelper( lightS )
 // scene.add( dlh )
 
-let lightFront = new THREE.PointLight(0xffffff, .5)
-lightFront.position.set(0,0,-3)
+let lightFront = new THREE.PointLight(0xffffff, .7)
+lightFront.position.set(0,7,3)
+lightFront.castShadow = true
+lightFront.shadow.bias = -0.00001
+lightFront.shadow.mapSize.width = shadowMapWidth
+lightFront.shadow.mapSize.height = shadowMapHeight
 scene.add(lightFront)
-let lightFront2 = new THREE.PointLight(0x00fab3, .3)
-lightFront2.position.set(0,0,-3)
-scene.add(lightFront2)
-let dlh = new THREE.PointLightHelper( lightFront )
-scene.add( dlh )
-let dlh2 = new THREE.PointLightHelper( lightFront2 )
-scene.add( dlh2 )
 
-// // Spot
-// let lightS = new THREE.SpotLight(0xffffff, 2, 0, Math.PI / 20, 0.2)
-// lightS.position.set(0, 1900, 1800)
-// // lightS.target.position.set(0,0,100)
-// lightS.castShadow = true
-// lightS.shadow.camera.near	= 600
-// lightS.shadow.camera.far = 4000
-// lightS.shadow.bias = -0.004
-// lightS.shadow.mapSize.width = shadowMapWidth
-// lightS.shadow.mapSize.height = shadowMapHeight
-// scene.add(lightS)
-// // let slightS = new THREE.SpotLightHelper( lightS );
-// // scene.add( slightS );
+let lightFront2 = new THREE.PointLight(0xffffff, .1)
+lightFront2.position.set(0,1,-5)
+scene.add(lightFront2)
+// let dlh = new THREE.PointLightHelper( lightFront )
+// scene.add( dlh )
+// let dlh2 = new THREE.PointLightHelper( lightFront2 )
+// scene.add( dlh2 )
 
 
 
@@ -127,13 +111,15 @@ dracoLoader.setDecoderPath( 'https://cdn.jsdelivr.net/npm/three@0.115.0/examples
 loader.setDRACOLoader( dracoLoader )
 
 let lazarus, mixer, clip1, action1
-const lazarusMate = new THREE.MeshPhongMaterial({
+const lazarusMate = new THREE.MeshStandardMaterial({
   skinning: true,
   color: 0xffffff,
   emissive: 0x000000,
+  metalness:.5,
+  shininess: 0xffffff,
   // shininess: 1,
-  side: THREE.DoubleSide,
-  // shadowSide: THREE.FrontSide,
+  side: THREE.BackSide,
+  shadowSide: THREE.DoubleSide,
   // shininess: 1
 })
 
@@ -156,7 +142,7 @@ function ( gltf ) { //XXX
       // // piece.material.roughtness = .5,
       // // piece.material.wireframe = true,
       piece.castShadow = true
-      // piece.receiveShadow = true
+      piece.receiveShadow = true
     }
   })
   mixer = new THREE.AnimationMixer(lazarus);
@@ -175,7 +161,7 @@ function ( gltf ) { //XXX
 /////////
 
 controls.target.set(0,1.5,0)
-camera.position.set( 0, floor+2, 17 )
+camera.position.set( 0, floor+2, 7 )
 
 /////////
 ///////// RENDER/ANIMATION LOOP
@@ -188,12 +174,7 @@ let render = function() {
   controls.update()
   let dt = clock.getDelta()
   if (mixer) mixer.update(dt);
-  lightFront.position.x = Math.cos(time) * 4
-  lightFront.position.z = Math.sin(time) * 7
-  lightFront.position.y = Math.sin(time) * 4
-  lightFront2.position.x = Math.sin(time) * 3
-  lightFront2.position.z = Math.cos(time) * 5
-  lightFront2.position.y = Math.cos(time) * 3
+  if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
   renderer.render(scene, camera)
   time+=0.02
 };
