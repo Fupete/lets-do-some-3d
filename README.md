@@ -19,14 +19,14 @@
 
 -----
 
-_I know, I am really a beginner, but continuing to learn new things is a way to nirvana these days :-)_
+_I know, I am still a beginner with tools like webgl, three js, blender... and that's what I love about it: continuing to learn new things is a way to nirvana these days :-)_
 
 ## 2020
 _Right now_
 
 **[project-lazarus &rarr;](./project-lazarus)**
 
-_Work in progress... still a lot to do!_
+_Work in progress... still a lot to do!_ My 1st low-poly robot in blender. I'm currently trying to make it walk, run, dance... will follow the attempt of controlling it in three.js. Let's see. I will keep u posted, take care, stay safe, cultivate freedom and imagination.
 
 ![thumb](./project-lazarus/project-lazarus.png)
 
