@@ -25,7 +25,7 @@
 
 // Vars
 let near = 1, far = 1000, floor = 0
-let shadowMapWidth = 1024, shadowMapHeight = 1024
+let shadowMapWidth = 2048, shadowMapHeight = 2048
 
 // Scene
 const scene = new THREE.Scene()
@@ -45,7 +45,7 @@ if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true // < Shadows enabled
-renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
+renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
