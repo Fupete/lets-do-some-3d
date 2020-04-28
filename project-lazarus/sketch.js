@@ -30,7 +30,7 @@ let shadowMapWidth = 2048, shadowMapHeight = 2048
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x444444)
-scene.fog = new THREE.FogExp2( scene.background, .1)
+// scene.fog = new THREE.FogExp2( scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
