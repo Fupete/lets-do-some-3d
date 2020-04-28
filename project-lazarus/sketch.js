@@ -44,7 +44,7 @@ let pRatio = window.devicePixelRatio
 if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.shadowMap.enabled = true // < Shadows enabled
+renderer.shadowMap.enabled = false // < Shadows enabled
 renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
