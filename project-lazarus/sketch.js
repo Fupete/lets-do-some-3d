@@ -150,7 +150,7 @@ const lazarusMate = new THREE.MeshStandardMaterial({
   emissive: 0x000000,
   metalness:.5,
   // side: THREE.BackSide,
-  shadowSide: THREE.FrontSide
+  // shadowSide: THREE.FrontSide
 })
 
 loader.load( './assets/project-lazarus-processed.glb',
