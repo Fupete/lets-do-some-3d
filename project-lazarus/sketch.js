@@ -44,7 +44,7 @@ let pRatio = window.devicePixelRatio
 if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.shadowMap.enabled = false // < Shadows enabled
+renderer.shadowMap.enabled = true // < Shadows enabled
 renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
@@ -77,7 +77,7 @@ scene.add(lightAmb)
 // Directional
 let lightS = new THREE.SpotLight( 0xffffff, .7, 0, Math.PI / 10, .4 )
 lightS.position.set( 0, 14, -7 )
-scene.add(lightS)
+// scene.add(lightS)
 // let dlh = new THREE.DirectionalLightHelper( lightS )
 // scene.add( dlh )
 
