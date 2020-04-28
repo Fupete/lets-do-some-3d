@@ -25,12 +25,12 @@
 
 // Vars
 let near = 1, far = 1000, floor = 0
-let shadowMapWidth = 2048, shadowMapHeight = 2048
+let shadowMapWidth = 1024, shadowMapHeight = 1024
 
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x444444)
-// scene.fog = new THREE.FogExp2( scene.background, .1)
+scene.fog = new THREE.FogExp2( scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
@@ -45,7 +45,7 @@ if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true // < Shadows enabled
-renderer.shadowMap.Type = THREE.PCFSoftShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
+renderer.shadowMap.Type = THREE.BasicShadowMap // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | THREE.VSMShadowMap
 // renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
