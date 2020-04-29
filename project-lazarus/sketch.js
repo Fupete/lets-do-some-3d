@@ -145,7 +145,7 @@ dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/")
 // dracoLoader.setDecoderPath( "https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/libs/draco/gltf/" )
 loader.setDRACOLoader(dracoLoader)
 
-let lazarus/*, mixer, clip1, action1*/
+let lazarus /*, mixer, clip1, action1*/
 const lazarusMate = new THREE.MeshStandardMaterial({
   skinning: true,
   color: 0xffffff,
@@ -184,12 +184,12 @@ loader.load('./assets/project-lazarus-processed.glb',
   })
 
 /////////
-///////// GUI/ANIMATIONS
+///////// GUI/ANIMATIONS | Just applied same logic from the skinning example on three.js website...
 /////////
 
 function createGUI(model, animations) {
 
-  let states = ['Rest', 'PinkPanther_Walk']
+  let states = ['Rest', 'PinkPanther_Walk', "Loto_position_yoga"]
 
   gui = new dat.GUI()
   mixer = new THREE.AnimationMixer(model)
@@ -230,13 +230,28 @@ function fadeToAction(name, duration) {
     previousAction.fadeOut(duration)
   }
 
+  if (name === "Loto_position_yoga") { // XXX for actions intro... to be generalized and to do the exit...
+    activeAction.setLoop(THREE.LoopOnce)
+    activeAction.clampWhenFinished = true
+  }
+
   activeAction
     .reset()
     .setEffectiveTimeScale(1)
     .setEffectiveWeight(1)
     .fadeIn(duration)
-    .play();
+    .play()
+
+  if (name === "Loto_position_yoga") {
+    mixer.addEventListener('finished', loopYoga)
+  }
 }
+
+function loopYoga() {
+   mixer.removeEventListener('finished', loopYoga)
+   fadeToAction("Loto_loop_yoga", .2)
+}
+
 
 /////////
 ///////// SCENE/CAMERA
@@ -257,7 +272,7 @@ let render = function() {
 
   let dt = clock.getDelta()
   if (mixer) mixer.update(dt)
-  // if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
+  if (lazarus) lazarus.rotation.y = Math.sin(time) * .5
 
   let d = 3
   light1.position.x = perlin.noise(time * .4, 0, 0) * 3
