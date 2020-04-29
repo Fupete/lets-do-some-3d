@@ -24,7 +24,7 @@ let near = 1,
 let shadowMapWidth = 2048,
   shadowMapHeight = 2048
 let api = {
-  state: 'Rest'
+  state: 'PinkPanther_Walk'
 }
 
 // Scene
@@ -216,7 +216,7 @@ function createGUI(model, animations) {
     fadeToAction(api.state, 0.2);
   }
 
-  activeAction = actions['Rest']
+  activeAction = actions['PinkPanther_Walk']
   activeAction.play()
 
 }
