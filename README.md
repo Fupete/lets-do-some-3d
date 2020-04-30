@@ -149,6 +149,7 @@ A demo for [@iretrtr](https://iretrtr.github.io/)'s Master Thesis in Design "[Di
 - [https://codepen.io/matthewmain/pen/YJwoVy?editors=0010](https://codepen.io/matthewmain/pen/YJwoVy?editors=0010)
 - [https://medium.com/@agm1984/how-to-rig-a-character-model-for-three-js-in-blender-846e258a9d9d](https://medium.com/@agm1984/how-to-rig-a-character-model-for-three-js-in-blender-846e258a9d9d)
 - [https://www.clicktorelease.com/code/](https://www.clicktorelease.com/code/)
+- https://codepen.io/jaamo/pen/MaOGZV?editors=0010
 - suggestions?
 
 ##### Many examples
