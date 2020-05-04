@@ -25,7 +25,7 @@ let near = .1,
   floor = 0
 
 let text = {
-  content: 'test',
+  content: 'FUPETE',
   height: 2,
   size: .7,
   hover: 0,
@@ -40,7 +40,7 @@ let font
 let textMesh1
 
 // mouse raycasting
-let mouseI = new THREE.Vector2(), INTERSECTED
+let mouseRAY = new THREE.Vector2(), SEL
 let objectsForRayCasting = []
 
 // mouse camera
@@ -58,7 +58,7 @@ scene.fog = new THREE.FogExp2(scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
-const camera = new THREE.PerspectiveCamera(45, aspect, near, far)
+const camera = new THREE.PerspectiveCamera(55, aspect, near, far)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -82,8 +82,8 @@ function onMouseMove( event ) {
 	mouse.x = ( event.clientX - windowHalf.x )
 	mouse.y = ( event.clientY - windowHalf.y )
   // mouse raycasting
-  mouseI.x = ( event.clientX / window.innerWidth ) * 2 - 1
-	mouseI.y = - ( event.clientY / window.innerHeight ) * 2 + 1
+  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
+	mouseRAY.y = - ( event.clientY / window.innerHeight ) * 2 + 1
 }
 
 window.addEventListener( 'touchmove', onTouchMove, false)
@@ -97,15 +97,6 @@ function onTouchMove( event ) {
     onMouseMove( event )
 }
 
-// window.addEventListener( 'touchmove', onTouchMove, false )
-// function onTouchMove( event ) {
-//   // touch camera
-// 	mouse.x = ( event.clientX - windowHalf.x )
-// 	mouse.y = ( event.clientY - windowHalf.y )
-//   // touch raycasting
-//   mouseI.x = ( event.clientX / window.innerWidth ) * 2 - 1
-// 	mouseI.y = - ( event.clientY / window.innerHeight ) * 2 + 1
-// }
 
 /////////
 ///////// LIGHTS
@@ -171,11 +162,12 @@ function createText() {
     y: - 0.5 * ( textGeo.boundingBox.max.y - textGeo.boundingBox.min.y )
   }
 	textMesh = new THREE.Mesh( textGeo, textMate )
-  textMesh.position.x = centerOffset.x
-	textMesh.position.y = centerOffset.y
-	textMesh.position.z = 0
-  textMesh.rotation.x = 0
-	textMesh.rotation.y = Math.PI * 2
+  // textMesh.position.x = centerOffset.x
+	// textMesh.position.y = centerOffset.y
+	// textMesh.position.z = 0
+  // textMesh.rotation.x = 0
+	// textMesh.rotation.y = Math.PI * 2
+  //new THREE.Box3().setFromObject( textMesh ).getCenter( textMesh.position ).multiplyScalar( - 1 )
   textGroup.add(textMesh)
 
   let textBox3 = new THREE.Box3().setFromObject( textMesh )
@@ -192,6 +184,10 @@ function createText() {
 
   // objectsForRayCasting.push( textMesh1 )
   objectsForRayCasting.push( textBox )
+  // objectsForRayCasting.push( textGroup )
+
+  new THREE.Box3().setFromObject( textGroup ).getCenter( textGroup.position ).multiplyScalar( - 1 );
+  // scene.add( object );
 }
 
 // let's make a sphere
@@ -234,32 +230,52 @@ let render = function() {
   camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
 
   // mouse raycasting, find intersections
-	raycaster.setFromCamera( mouseI, camera )
+	raycaster.setFromCamera( mouseRAY, camera )
   let intersects = raycaster.intersectObjects( objectsForRayCasting )
   if ( intersects.length > 0 ) {
-    if ( INTERSECTED != intersects[ 0 ].object ) {
-      if ( INTERSECTED ) {
-        INTERSECTED.material.color.setHex( INTERSECTED.currentHex )
-        INTERSECTED.scale.set( INTERSECTED.currentScale )
+    if ( SEL != intersects[ 0 ].object ) {
+      if ( SEL ) {
+        if ( SEL != textGroup ) {
+          SEL.material.color.setHex( SEL.currentHex )
+          SEL.scale.set( SEL.currentScale )
+        } else {
+          for (j = 0; j < SEL.children.length; j++) {
+            SEL.children[j].material.color.setHex( SEL.children[j].currentHex )
+            SEL.children[j].scale.set( SEL.children[j].currentScale )
+          }
+        }
       }
-      INTERSECTED = intersects[ 0 ].object
-      if ( INTERSECTED == textBox ) {
-        INTERSECTED = textMesh
-
+      SEL = intersects[ 0 ].object
+      if ( SEL.parent == textGroup ) {
+        SEL = textGroup
+        for (j = 0; j < SEL.children.length; j++) {
+          SEL.children[j].currentHex = SEL.children[j].material.color.getHex()
+          SEL.children[j].currentScale = SEL.children[j].scale
+          SEL.children[j].scale.set( 1.2, 1.2, 1.2)
+          SEL.children[j].material.color.setHex( 0xff0000 ) // < è l'oggetto
+        }
+      } else {
+        SEL.currentHex = SEL.material.color.getHex()
+        SEL.currentScale = SEL.scale
+        SEL.scale.set( 1.2, 1.2, 1.2)
+        SEL.material.color.setHex( 0xff0000 ) // < è l'oggetto
       }
-      INTERSECTED.currentHex = INTERSECTED.material.color.getHex()
-      INTERSECTED.currentScale = INTERSECTED.scale
-      INTERSECTED.scale.set( 1.2, 1.2, 1.2)
-      INTERSECTED.material.color.setHex( 0xff0000 ) // < è l'oggetto
 
-      // console.log(INTERSECTED) // XXX da attivare oggetto/fratello nel gruppo...
+      // console.log(SEL) // XXX da attivare oggetto/fratello nel gruppo...
     }
   } else { // non ci sono oggetti
-    if ( INTERSECTED ) {
-      INTERSECTED.material.color.setHex( INTERSECTED.currentHex )
-      INTERSECTED.scale.set( 1, 1, 1 )
+    if ( SEL) {
+      if ( SEL != textGroup ) {
+        SEL.material.color.setHex( SEL.currentHex )
+        SEL.scale.set( 1, 1, 1 )
+      } else {
+        for (j = 0; j < SEL.children.length; j++) {
+          SEL.children[j].material.color.setHex( SEL.children[j].currentHex )
+          SEL.children[j].scale.set( 1, 1, 1 )
+        }
+      }
     }
-    INTERSECTED = null;
+    SEL = null;
   }
 
   renderer.render(scene, camera)
