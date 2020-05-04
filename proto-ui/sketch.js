@@ -25,7 +25,7 @@ let near = .1,
   floor = 0
 
 let text = {
-  content: 'portfolio',
+  content: 'test',
   height: 2,
   size: .7,
   hover: 0,
@@ -47,23 +47,13 @@ let objectsForRayCasting = []
 let mouse = new THREE.Vector2()
 const target = new THREE.Vector2()
 let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 )
-window.addEventListener( 'mousemove', onMouseMove, false )
-
-function onMouseMove( event ) {
-  // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
-  // mouse raycasting
-  mouseI.x = ( event.clientX / window.innerWidth ) * 2 - 1
-	mouseI.y = - ( event.clientY / window.innerHeight ) * 2 + 1
-}
 
 // Raycaster
 let raycaster = new THREE.Raycaster()
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color(0x000000)
+scene.background = new THREE.Color(0xFFFFFF)
 scene.fog = new THREE.FogExp2(scene.background, .1)
 
 // Camera
@@ -84,31 +74,63 @@ document.body.appendChild(renderer.domElement)
 // Add listener for window resize.
 window.addEventListener('resize', onWindowResize, false)
 
+// raycaster
+window.addEventListener( 'mousemove', onMouseMove, false )
+function onMouseMove( event ) {
+
+  // mouse camera
+	mouse.x = ( event.clientX - windowHalf.x )
+	mouse.y = ( event.clientY - windowHalf.y )
+  // mouse raycasting
+  mouseI.x = ( event.clientX / window.innerWidth ) * 2 - 1
+	mouseI.y = - ( event.clientY / window.innerHeight ) * 2 + 1
+}
+
+window.addEventListener( 'touchmove', onTouchMove, false)
+function onTouchMove( event ) {
+
+    event.preventDefault()
+    // touch camera
+    event.clientX = event.touches[0].pageX
+    event.clientY = event.touches[0].pageY
+
+    onMouseMove( event )
+}
+
+// window.addEventListener( 'touchmove', onTouchMove, false )
+// function onTouchMove( event ) {
+//   // touch camera
+// 	mouse.x = ( event.clientX - windowHalf.x )
+// 	mouse.y = ( event.clientY - windowHalf.y )
+//   // touch raycasting
+//   mouseI.x = ( event.clientX / window.innerWidth ) * 2 - 1
+// 	mouseI.y = - ( event.clientY / window.innerHeight ) * 2 + 1
+// }
 
 /////////
 ///////// LIGHTS
 /////////
 
 // Ambient
-let lightAmb = new THREE.AmbientLight(0x999999)
+let lightAmb = new THREE.AmbientLight(0xFFFFFF)
 scene.add(lightAmb)
 
 // Directional
-let lightS = new THREE.SpotLight(0xffffff, .7, 0, Math.PI / 10, .4)
-lightS.position.set(0, 14, -7)
-scene.add(lightS)
-// let dlh = new THREE.DirectionalLightHelper( lightS )
-// scene.add( dlh )
-
-let lightFront = new THREE.PointLight(0xffffff, .7)
-lightFront.position.set(0, 7, 3)
-scene.add(lightFront)
-// let dlh = new THREE.PointLightHelper( lightFront )
-// scene.add( dlh )
-
-let lightFront2 = new THREE.PointLight(0xffffff, .1)
-lightFront2.position.set(0, 1, -5)
-scene.add(lightFront2)
+// let lightS = new THREE.SpotLight(0xffffff, .7, 0, Math.PI / 10, .4)
+// lightS.position.set(0, 14, -7)
+// scene.add(lightS)
+// // let dlh = new THREE.DirectionalLightHelper( lightS )
+// // scene.add( dlh )
+//
+// let lightFront = new THREE.PointLight(0xffffff, .7)
+// lightFront.position.set(0, 7, 3)
+// scene.add(lightFront)
+// // let dlh = new THREE.PointLightHelper( lightFront )
+// // scene.add( dlh )
+//
+// let lightFront2 = new THREE.PointLight(0xffffff, .1)
+// lightFront2.position.set(0, 1, -5)
+// scene.add(lightFront2)
 // let dlh2 = new THREE.PointLightHelper( lightFront2 )
 // scene.add( dlh2 )
 
@@ -128,7 +150,7 @@ loader.load( 'assets/ttf/Hack-Regular.ttf', function ( json ) {
 let textGroup = new THREE.Group()
 scene.add( textGroup )
 let textBox
-let textMate = new THREE.MeshPhongMaterial( { color: 0xffffff, wireframe:text.wireframe } )
+let textMate = new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } )
 
 function createText() {
 
@@ -162,7 +184,7 @@ function createText() {
   textBox3.getSize(textBoxSize)
   textBox3.getCenter(textBoxCenter)
   let textBoxGeo = new THREE.BoxGeometry(textBoxSize.x, textBoxSize.y, textBoxSize.z)
-  textBox = new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ wireframe:true, /*visible:false XXX*/ }))
+  textBox = new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:true, visible:true }))
   textBox.position.x = textBoxCenter.x
   textBox.position.y = textBoxCenter.y
   textBox.position.z = textBoxCenter.z
@@ -174,14 +196,14 @@ function createText() {
 
 // let's make a sphere
 let geomSphere = new THREE.SphereGeometry( .3, 35, 35 )
-let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0xffffff, wireframe:true } ))
+let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
 scene.add(sphere)
 objectsForRayCasting.push( sphere )
 sphere.position.x = 0
 sphere.position.y = 1
 sphere.position.z = 1
 
-let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0xffffff, wireframe:true } ))
+let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
 scene.add(sphere1)
 objectsForRayCasting.push( sphere1 )
 sphere1.position.x = 1
@@ -216,17 +238,26 @@ let render = function() {
   let intersects = raycaster.intersectObjects( objectsForRayCasting )
   if ( intersects.length > 0 ) {
     if ( INTERSECTED != intersects[ 0 ].object ) {
-      if ( INTERSECTED ) { // non è l'oggetto
-        INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex )
+      if ( INTERSECTED ) {
+        INTERSECTED.material.color.setHex( INTERSECTED.currentHex )
+        INTERSECTED.scale.set( INTERSECTED.currentScale )
       }
       INTERSECTED = intersects[ 0 ].object
-      INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex()
-      INTERSECTED.material.emissive.setHex( 0xff0000 ) // < è l'oggetto
-      console.log(INTERSECTED) // XXX da attivare oggetto/fratello nel gruppo...
+      if ( INTERSECTED == textBox ) {
+        INTERSECTED = textMesh
+
+      }
+      INTERSECTED.currentHex = INTERSECTED.material.color.getHex()
+      INTERSECTED.currentScale = INTERSECTED.scale
+      INTERSECTED.scale.set( 1.2, 1.2, 1.2)
+      INTERSECTED.material.color.setHex( 0xff0000 ) // < è l'oggetto
+
+      // console.log(INTERSECTED) // XXX da attivare oggetto/fratello nel gruppo...
     }
   } else { // non ci sono oggetti
     if ( INTERSECTED ) {
-      INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex )
+      INTERSECTED.material.color.setHex( INTERSECTED.currentHex )
+      INTERSECTED.scale.set( 1, 1, 1 )
     }
     INTERSECTED = null;
   }
