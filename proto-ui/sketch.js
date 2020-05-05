@@ -50,8 +50,8 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true
 })
 let pRatio = window.devicePixelRatio
-if (pRatio > 2) pRatio = 2 // < not too much on mobile...
-// renderer.setPixelRatio(pRatio) // XXX disabled for mobile performance...
+if (pRatio > 2) pRatio = 2 // < not more than 2...
+renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(renderer.domElement)
