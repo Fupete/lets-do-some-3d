@@ -19,6 +19,11 @@
 ///////// SETUP + RENDER
 /////////
 
+// stats
+let stats = new Stats()
+stats.showPanel( 0 )
+document.body.appendChild( stats.dom )
+
 // Vars
 let near = .5,
   far = 1000,
@@ -47,18 +52,33 @@ const camera = new THREE.PerspectiveCamera(60, aspect, near, far)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-  antialias: true
+  antialias: true,
+  powerPreference: "high-performance"
 })
 let pRatio = window.devicePixelRatio
 if (pRatio > 2) pRatio = 2 // < not more than 2...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.gammaFactor = 2.2
+renderer.gammaOutput = true
+renderer.outputEncoding = THREE.sRGBEncoding
 document.body.appendChild(renderer.domElement)
 
+// Orbit controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement)
+controls.enablePan = false
+controls.enableDamping = true
+controls.dampingFactor = 0.19
+controls.minDistance = 4
+controls.maxDistance = 11
+controls.maxPolarAngle = Math.PI
+controls.minPolarAngle = - Math.PI
+controls.maxAzimuthAngle = Math.PI / 2
+controls.minAzimuthAngle = -Math.PI / 2
+
 // gimbal...
-let gimbal = new Gimbal()
-gimbal.enable()
+// let gimbal = new Gimbal()
+// gimbal.enable()
 
 // mouse camera
 let mouse = new THREE.Vector2()
@@ -74,15 +94,20 @@ let raycaster = new THREE.Raycaster()
 ///////// LIGHTS
 /////////
 
-// Ambient
 let lightAmb = new THREE.AmbientLight(0xFFFFFF)
 scene.add(lightAmb)
+
+let dirLight = new THREE.DirectionalLight( 0xffffff, 4 );
+dirLight.color.setHSL( 0.1, 1, 1 );
+dirLight.position.set( - 1, 1.75, 3 );
+scene.add( dirLight );
+// dirLightHeper = new THREE.DirectionalLightHelper( dirLight, 10 );
+// scene.add( dirLightHeper );
 
 /////////
 ///////// GEOMETRIES
 /////////
 
-//// FONT
 let font
 let loader = new THREE.TTFLoader()
 loader.load( 'assets/ttf/Hack-Bold.ttf', function ( json ) {
@@ -96,7 +121,7 @@ scene.add( textGroup )
 
 let textMesh
 let textHoverBox
-let textMate = new THREE.MeshBasicMaterial( { color: 0x999999, wireframe:text.wireframe } )
+let textMate = new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } )
 
 function createText() {
 
@@ -124,7 +149,7 @@ function createText() {
   let textBox3Size = new THREE.Vector3()
   textBox3.getSize(textBox3Size)
   let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
-  textHoverBox = new THREE.Mesh(textBoxGeo, new THREE.MeshBasicMaterial({ color: 0x000000, wireframe:true, visible:true }))
+  textHoverBox = new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:false, visible:false }))
   textGroup.add(textHoverBox)
 
   textMesh.name = "testo"
@@ -138,14 +163,14 @@ function createText() {
 
 // let's make a sphere
 let geomSphere = new THREE.SphereGeometry( .5, 35, 35 )
-let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
+let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:false } ))
 scene.add(sphere)
 objectsForRayCasting.push( sphere )
 sphere.position.x = 0
 sphere.position.y = 2
 sphere.position.z = 2
 
-let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
+let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:false } ))
 scene.add(sphere1)
 objectsForRayCasting.push( sphere1 )
 sphere1.position.x = 2
@@ -157,22 +182,24 @@ sphere1.position.z = -2
 ///////// SCENE/CAMERA
 /////////
 
-// controls.target.set(0, 0, 0)
-camera.position.set(0, 0, 7)
+controls.target.set(0, 0, 0)
+camera.position.set(0, floor + 2, 7)
 
 /////////
 ///////// RENDER/ANIMATION LOOP
 /////////
 
-let cAttivo =  "0x00ff00"
-let cPassivo = "0xffffff"
-if (gimbal.yaw) gimbal.recalibrate()
+let cAttivo =  "0x00ffff"
+let cPassivo = "0x000000"
+// if (gimbal.yaw) gimbal.recalibrate()
 
 // set
 let time = 0
 let render = function() {
-  gimbal.update()
-  requestAnimationFrame(render)
+  stats.begin()
+
+  // gimbal.update()
+  controls.update()
 
   // tilt camera 1
   // camera.position.x = ( mouse.x - camera.position.x ) * .005
@@ -180,20 +207,23 @@ let render = function() {
 	// camera.lookAt( scene.position )
 
   // gimbal for device orientation
-  if (gimbal.yaw) {
-    camera.rotation.x = 0.25 * - gimbal.pitch
-    camera.rotation.y = 0.25 * - gimbal.yaw
-  } else {
+  // if (gimbal.yaw) {
+  //   camera.rotation.x = 0.25 * - gimbal.pitch
+  //   camera.rotation.y = 0.25 * - gimbal.yaw
+  // } else {
     // tilt camera 2
-    target.x = ( 1 - mouse.x ) * 0.001
-    target.y = ( 1 - mouse.y ) * 0.001
-    camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
-    camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
-  }
+    // target.x = ( 1 - mouse.x ) * 0.001
+    // target.y = ( 1 - mouse.y ) * 0.001
+    // camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
+    // camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
+  // }
 
+  stats.end()
+  requestAnimationFrame(render)
   renderer.render(scene, camera)
   // time += 0.015
 }
+// OrbitControls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 
 // go
 render()
@@ -239,22 +269,22 @@ function objectHover_on(o) {
   if ( o.parent == textGroup ) {
     // gruppo
     for (j = 0; j < o.parent.children.length; j++) {
-      o.parent.children[j].material.color.setHex( cAttivo )
+      o.parent.children[j].material.emissive.setHex( cAttivo )
     }
   } else {
     // oggetto
-    o.material.color.setHex( cAttivo )
+    o.material.emissive.setHex( cAttivo )
   }
 }
 
 function objectHover_off(o) {
   if ( o.parent != textGroup ) {
     // gruppo
-    o.material.color.setHex( cPassivo )
+    o.material.emissive.setHex( cPassivo )
   } else {
     // oggetto
     for (j = 0; j < o.parent.children.length; j++) {
-      o.parent.children[j].material.color.setHex( cPassivo )
+      o.parent.children[j].material.emissive.setHex( cPassivo )
     }
   }
 }
@@ -262,8 +292,8 @@ function objectHover_off(o) {
 function onWindowResize() {
   windowHalf.set( window.innerWidth / 2, window.innerHeight / 2 );
   camera.aspect = window.innerWidth / window.innerHeight
-  cam.left = -camera.aspect * 10;
-  cam.right = camera.aspect * 10;
+  // cam.left = -camera.aspect * 10;
+  // cam.right = camera.aspect * 10;
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
 }
