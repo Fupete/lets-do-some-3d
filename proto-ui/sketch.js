@@ -200,8 +200,17 @@ let render = function() {
   // tilt camera
   // camera.position.z = -gimbal.roll*0.05
   // camera.quaternion.copy(gimbal.quaternion)
-  camera.position.x = ( mouse.x - gimbal.yaw - camera.position.x ) * .005
-	camera.position.y = ( - mouse.y - gimbal.pitch - camera.position.y ) * .005
+  let yaw, roll
+  if (gimbal.yaw) {
+    roll = 0//- gimbal.roll * 0.05
+    yaw = - gimbal.yaw * 0.05
+  } else {
+    roll = 0
+    yaw = 0
+  }
+
+  camera.position.x = ( mouse.x - camera.position.x ) * .005 + roll
+	camera.position.y = ( - mouse.y - camera.position.y ) * .005 + yaw
 	camera.lookAt( scene.position )
 
   renderer.render(scene, camera)
