@@ -193,7 +193,7 @@ let cPassivo = "0xffffff"
 // set
 let time = 0
 let render = function() {
-    controls.update()
+  controls.update()
   requestAnimationFrame(render)
 
   // tilt camera
