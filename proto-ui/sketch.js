@@ -137,20 +137,20 @@ function createText() {
 }
 
 // let's make a sphere
-let geomSphere = new THREE.SphereGeometry( .3, 35, 35 )
+let geomSphere = new THREE.SphereGeometry( .5, 35, 35 )
 let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
 scene.add(sphere)
 objectsForRayCasting.push( sphere )
 sphere.position.x = 0
-sphere.position.y = 1
-sphere.position.z = 1
+sphere.position.y = 2
+sphere.position.z = 2
 
 let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:true } ))
 scene.add(sphere1)
 objectsForRayCasting.push( sphere1 )
-sphere1.position.x = 1
-sphere1.position.y = 1
-sphere1.position.z = -1
+sphere1.position.x = 2
+sphere1.position.y = 2
+sphere1.position.z = -2
 
 
 /////////
@@ -203,7 +203,7 @@ let render = function() {
   let yaw, roll
   if (gimbal.yaw) {
     roll = 0//- gimbal.roll * 0.05
-    yaw = - gimbal.yaw * 0.05
+    yaw =  - gimbal.yaw
   } else {
     roll = 0
     yaw = 0
