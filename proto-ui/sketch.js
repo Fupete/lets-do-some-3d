@@ -20,24 +20,21 @@
 /////////
 
 // Vars
-let near = .1,
+let near = .5,
   far = 1000,
   floor = 0
 
 let text = {
   content: 'FUPETE',
   height: 2,
-  size: .7,
+  size: 1,
   hover: 0,
 	curveSegments: 7,
   bevelThickness: 0.05,
-  bevelSize: 0.01,
-  bevelEnabled: false,
-  wireframe: true
+  bevelSize: 0.05,
+  bevelEnabled: true,
+  wireframe: false
 }
-
-let font
-let textMesh1
 
 // mouse raycasting
 let mouseRAY = new THREE.Vector2(), SEL
@@ -53,12 +50,12 @@ let raycaster = new THREE.Raycaster()
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color(0xFFFFFF)
+scene.background = new THREE.Color(0x212121)
 scene.fog = new THREE.FogExp2(scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
-const camera = new THREE.PerspectiveCamera(55, aspect, near, far)
+const camera = new THREE.PerspectiveCamera(60, aspect, near, far)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -71,33 +68,6 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(renderer.domElement)
 
-// Add listener for window resize.
-window.addEventListener('resize', onWindowResize, false)
-
-// raycaster
-window.addEventListener( 'mousemove', onMouseMove, false )
-function onMouseMove( event ) {
-
-  // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
-  // mouse raycasting
-  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
-	mouseRAY.y = - ( event.clientY / window.innerHeight ) * 2 + 1
-}
-
-window.addEventListener( 'touchmove', onTouchMove, false)
-function onTouchMove( event ) {
-
-    event.preventDefault()
-    // touch camera
-    event.clientX = event.touches[0].pageX
-    event.clientY = event.touches[0].pageY
-
-    onMouseMove( event )
-}
-
-
 /////////
 ///////// LIGHTS
 /////////
@@ -106,42 +76,25 @@ function onTouchMove( event ) {
 let lightAmb = new THREE.AmbientLight(0xFFFFFF)
 scene.add(lightAmb)
 
-// Directional
-// let lightS = new THREE.SpotLight(0xffffff, .7, 0, Math.PI / 10, .4)
-// lightS.position.set(0, 14, -7)
-// scene.add(lightS)
-// // let dlh = new THREE.DirectionalLightHelper( lightS )
-// // scene.add( dlh )
-//
-// let lightFront = new THREE.PointLight(0xffffff, .7)
-// lightFront.position.set(0, 7, 3)
-// scene.add(lightFront)
-// // let dlh = new THREE.PointLightHelper( lightFront )
-// // scene.add( dlh )
-//
-// let lightFront2 = new THREE.PointLight(0xffffff, .1)
-// lightFront2.position.set(0, 1, -5)
-// scene.add(lightFront2)
-// let dlh2 = new THREE.PointLightHelper( lightFront2 )
-// scene.add( dlh2 )
-
 /////////
 ///////// GEOMETRIES
 /////////
 
 //// FONT
+let font
 let loader = new THREE.TTFLoader()
-loader.load( 'assets/ttf/Hack-Regular.ttf', function ( json ) {
+loader.load( 'assets/ttf/Hack-Bold.ttf', function ( json ) {
 	font = new THREE.Font( json )
 	createText()
 } )
 
-
 // TEXT
 let textGroup = new THREE.Group()
 scene.add( textGroup )
-let textBox
-let textMate = new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } )
+
+let textMesh
+let textHoverBox
+let textMate = new THREE.MeshBasicMaterial( { color: 0x999999, wireframe:text.wireframe } )
 
 function createText() {
 
@@ -155,38 +108,29 @@ function createText() {
 					bevelSize: text.bevelSize,
 					bevelEnabled: text.bevelEnabled
 				} )
-	textGeo.computeBoundingBox()
-	textGeo.computeVertexNormals()
-  let centerOffset = {
-    x: - 0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x ),
-    y: - 0.5 * ( textGeo.boundingBox.max.y - textGeo.boundingBox.min.y )
-  }
+	// textGeo.computeBoundingBox()
+	// textGeo.computeVertexNormals()
 	textMesh = new THREE.Mesh( textGeo, textMate )
-  // textMesh.position.x = centerOffset.x
-	// textMesh.position.y = centerOffset.y
-	// textMesh.position.z = 0
-  // textMesh.rotation.x = 0
-	// textMesh.rotation.y = Math.PI * 2
-  //new THREE.Box3().setFromObject( textMesh ).getCenter( textMesh.position ).multiplyScalar( - 1 )
   textGroup.add(textMesh)
 
+  // let's center
   let textBox3 = new THREE.Box3().setFromObject( textMesh )
-  let textBoxCenter = new THREE.Vector3()
-  let textBoxSize = new THREE.Vector3()
-  textBox3.getSize(textBoxSize)
-  textBox3.getCenter(textBoxCenter)
-  let textBoxGeo = new THREE.BoxGeometry(textBoxSize.x, textBoxSize.y, textBoxSize.z)
-  textBox = new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:true, visible:true }))
-  textBox.position.x = textBoxCenter.x
-  textBox.position.y = textBoxCenter.y
-  textBox.position.z = textBoxCenter.z
-  textGroup.add(textBox)
+  textBox3.getCenter( textMesh.position )
+  textMesh.position.multiplyScalar( - 1 )
 
-  // objectsForRayCasting.push( textMesh1 )
-  objectsForRayCasting.push( textBox )
-  // objectsForRayCasting.push( textGroup )
+  // let's make the hover box
+  let textBox3Size = new THREE.Vector3()
+  textBox3.getSize(textBox3Size)
+  let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
+  textHoverBox = new THREE.Mesh(textBoxGeo, new THREE.MeshBasicMaterial({ color: 0x000000, wireframe:true, visible:true }))
+  textGroup.add(textHoverBox)
 
-  new THREE.Box3().setFromObject( textGroup ).getCenter( textGroup.position ).multiplyScalar( - 1 );
+  textMesh.name = "testo"
+  textHoverBox.name = "box"
+  textGroup.name = "gruppo"
+
+  objectsForRayCasting.push( textHoverBox)
+
   // scene.add( object );
 }
 
@@ -214,68 +158,59 @@ sphere1.position.z = -1
 // controls.target.set(0, 0, 0)
 camera.position.set(0, 0, 7)
 
+function objectHover_on(o) {
+  if ( o.parent == textGroup ) {
+    // gruppo
+    for (j = 0; j < o.parent.children.length; j++) {
+      o.parent.children[j].material.color.setHex( cAttivo )
+    }
+  } else {
+    // oggetto
+    o.material.color.setHex( cAttivo )
+  }
+}
+
+function objectHover_off(o) {
+  if ( o.parent != textGroup ) {
+    // gruppo
+    o.material.color.setHex( cPassivo )
+  } else {
+    // oggetto
+    for (j = 0; j < o.parent.children.length; j++) {
+      o.parent.children[j].material.color.setHex( cPassivo )
+    }
+  }
+}
+
 /////////
 ///////// RENDER/ANIMATION LOOP
 /////////
+
+let cAttivo =  "0x00ff00"
+let cPassivo = "0xffffff"
 
 // set
 let time = 0
 let render = function() {
   requestAnimationFrame(render)
 
-  // tilt camera
-  target.x = ( 1 - mouse.x ) * 0.001
-  target.y = ( 1 - mouse.y ) * 0.001
-  camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
-  camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
+  // tilt camera 
+  camera.position.x = ( mouse.x - camera.position.x ) * .005
+	camera.position.y = ( - mouse.y - camera.position.y ) * .005
+	camera.lookAt( scene.position )
 
   // mouse raycasting, find intersections
 	raycaster.setFromCamera( mouseRAY, camera )
   let intersects = raycaster.intersectObjects( objectsForRayCasting )
-  if ( intersects.length > 0 ) {
+  if ( intersects[0]) {
     if ( SEL != intersects[ 0 ].object ) {
-      if ( SEL ) {
-        if ( SEL != textGroup ) {
-          SEL.material.color.setHex( SEL.currentHex )
-          SEL.scale.set( SEL.currentScale )
-        } else {
-          for (j = 0; j < SEL.children.length; j++) {
-            SEL.children[j].material.color.setHex( SEL.children[j].currentHex )
-            SEL.children[j].scale.set( SEL.children[j].currentScale )
-          }
-        }
-      }
-      SEL = intersects[ 0 ].object
-      if ( SEL.parent == textGroup ) {
-        SEL = textGroup
-        for (j = 0; j < SEL.children.length; j++) {
-          SEL.children[j].currentHex = SEL.children[j].material.color.getHex()
-          SEL.children[j].currentScale = SEL.children[j].scale
-          SEL.children[j].scale.set( 1.2, 1.2, 1.2)
-          SEL.children[j].material.color.setHex( 0xff0000 ) // < è l'oggetto
-        }
-      } else {
-        SEL.currentHex = SEL.material.color.getHex()
-        SEL.currentScale = SEL.scale
-        SEL.scale.set( 1.2, 1.2, 1.2)
-        SEL.material.color.setHex( 0xff0000 ) // < è l'oggetto
-      }
-
-      // console.log(SEL) // XXX da attivare oggetto/fratello nel gruppo...
+      if ( SEL ) objectHover_off(SEL)
+      SEL = intersects[0].object
+      objectHover_on(SEL)
     }
-  } else { // non ci sono oggetti
-    if ( SEL) {
-      if ( SEL != textGroup ) {
-        SEL.material.color.setHex( SEL.currentHex )
-        SEL.scale.set( 1, 1, 1 )
-      } else {
-        for (j = 0; j < SEL.children.length; j++) {
-          SEL.children[j].material.color.setHex( SEL.children[j].currentHex )
-          SEL.children[j].scale.set( 1, 1, 1 )
-        }
-      }
-    }
-    SEL = null;
+  } else {
+    if ( SEL ) objectHover_off(SEL)
+    SEL = null
   }
 
   renderer.render(scene, camera)
@@ -284,6 +219,33 @@ let render = function() {
 
 // go
 render()
+
+/////////
+///////// EVENTS
+/////////
+
+// Add listener for window resize.
+window.addEventListener('resize', onWindowResize, false)
+
+
+window.addEventListener( 'mousemove', onMouseMove, false )
+function onMouseMove( event ) {
+  // mouse camera
+	mouse.x = ( event.clientX - windowHalf.x )
+	mouse.y = ( event.clientY - windowHalf.y )
+  // mouse raycasting
+  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
+	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
+}
+
+window.addEventListener( 'touchmove', onTouchMove, false)
+function onTouchMove( event ) {
+    event.preventDefault()
+    // touch camera
+    event.clientX = event.changedTouches[0].pageX
+    event.clientY = event.changedTouches[0].pageY
+    onMouseMove( event )
+}
 
 function onWindowResize() {
   windowHalf.set( window.innerWidth / 2, window.innerHeight / 2 );
