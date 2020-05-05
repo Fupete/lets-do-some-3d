@@ -197,23 +197,9 @@ let render = function() {
   requestAnimationFrame(render)
 
   // tilt camera
-  camera.position.x = ( mouse.x - camera.position.x ) * .005
-	camera.position.y = ( - mouse.y - camera.position.y ) * .005
-	camera.lookAt( scene.position )
-
-  // mouse raycasting, find intersections
-	raycaster.setFromCamera( mouseRAY, camera )
-  let intersects = raycaster.intersectObjects( objectsForRayCasting )
-  if ( intersects[0]) {
-    if ( SEL != intersects[ 0 ].object ) {
-      if ( SEL ) objectHover_off(SEL)
-      SEL = intersects[0].object
-      objectHover_on(SEL)
-    }
-  } else {
-    if ( SEL ) objectHover_off(SEL)
-    SEL = null
-  }
+  // camera.position.x = ( mouse.x - camera.position.x ) * .005
+	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
+	// camera.lookAt( scene.position )
 
   renderer.render(scene, camera)
   // time += 0.015
@@ -238,6 +224,20 @@ function onMouseMove( event ) {
   // mouse raycasting
   mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
 	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
+
+  // mouse raycasting, find intersections
+  raycaster.setFromCamera( mouseRAY, camera )
+  let intersects = raycaster.intersectObjects( objectsForRayCasting )
+  if ( intersects[0]) {
+    if ( SEL != intersects[ 0 ].object ) {
+      if ( SEL ) objectHover_off(SEL)
+      SEL = intersects[0].object
+      objectHover_on(SEL)
+    }
+  } else {
+    if ( SEL ) objectHover_off(SEL)
+    SEL = null
+  }
 }
 
 window.addEventListener( 'touchmove', onTouchMove, false)
