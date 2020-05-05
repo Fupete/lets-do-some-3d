@@ -198,12 +198,10 @@ let render = function() {
   requestAnimationFrame(render)
 
   // tilt camera
-  camera.position.x = -gimbal.pitch*0.3
-  camera.position.y = -gimbal.yaw*0.3
-  camera.position.z = -gimbal.roll*0.3
+  // camera.position.z = -gimbal.roll*0.05
   // camera.quaternion.copy(gimbal.quaternion)
-  // camera.position.x = ( mouse.x - camera.position.x ) * .005
-	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
+  camera.position.x = ( mouse.x - gimbal.yaw - camera.position.x ) * .005
+	camera.position.y = ( - mouse.y - gimbal.pitch - camera.position.y ) * .005
 	camera.lookAt( scene.position )
 
   renderer.render(scene, camera)
