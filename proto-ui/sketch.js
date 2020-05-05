@@ -198,8 +198,6 @@ camera.position.set(0, floor + 2, 7)
 ///////// RENDER/ANIMATION LOOP
 /////////
 
-let cAttivo =  "0x00ffff"
-let cPassivo = "0x000000"
 // if (gimbal.yaw) gimbal.recalibrate()
 
 // set
@@ -273,6 +271,9 @@ function onTouchMove( event ) {
     onMouseMove( event )
 }
 window.addEventListener( 'touchmove', onTouchMove, false)
+
+let cAttivo =  "0x00ffff"
+let cPassivo = "0x000000"
 
 function objectHover_on(o) {
   if ( o.parent.type === "Group" ) {
