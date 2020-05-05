@@ -199,7 +199,7 @@ let render = function() {
 
   // tilt camera
   camera.rotation.x = gimbal.pitch
-  arrowPitch.rotation.y = gimbal.yaw
+  camera.rotation.y = gimbal.yaw
   camera.rotation.z = gimbal.roll
   // camera.quaternion.copy(gimbal.quaternion)
   camera.position.x = ( mouse.x - camera.position.x ) * .005
