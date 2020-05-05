@@ -29,8 +29,13 @@ let near = .5,
   far = 1000,
   floor = 0
 
+let textes = []
+textes.push("FUPETE")
+textes.push("GERJKA")
+textes.push("NASONERO")
+textes.push("TELLER+K")
+
 let text = {
-  content: 'FUPETE',
   height: 2,
   size: 1,
   hover: 0,
@@ -116,49 +121,53 @@ loader.load( 'assets/ttf/Hack-Bold.ttf', function ( json ) {
 } )
 
 // TEXT
-let textGroup = new THREE.Group()
-scene.add( textGroup )
-
-let textMesh
-let textHoverBox
-let textMate = new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } )
+let textGeo = []
+let textGroup = []
+let textMesh = []
+let textHoverBox = []
 
 function createText() {
 
-  // testo
-  let textGeo = new THREE.TextBufferGeometry( text.content, {
-					font: font,
-					size: text.size,
-					height: text.height,
-					curveSegments: text.curveSegments,
-					bevelThickness: text.bevelThickness,
-					bevelSize: text.bevelSize,
-					bevelEnabled: text.bevelEnabled
-				} )
-	// textGeo.computeBoundingBox()
-	// textGeo.computeVertexNormals()
-	textMesh = new THREE.Mesh( textGeo, textMate )
-  textGroup.add(textMesh)
 
-  // let's center
-  let textBox3 = new THREE.Box3().setFromObject( textMesh )
-  textBox3.getCenter( textMesh.position )
-  textMesh.position.multiplyScalar( - 1 )
 
-  // let's make the hover box
-  let textBox3Size = new THREE.Vector3()
-  textBox3.getSize(textBox3Size)
-  let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
-  textHoverBox = new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:false, visible:false }))
-  textGroup.add(textHoverBox)
+  for (let t = 0; t<textes.length; t++) {
 
-  textMesh.name = "testo"
-  textHoverBox.name = "box"
-  textGroup.name = "gruppo"
+    textGroup.push(new THREE.Group())
+    scene.add( textGroup[t] )
 
-  objectsForRayCasting.push( textHoverBox)
+    // testo
+    let textGeo = new THREE.TextBufferGeometry( textes[t], {
+  					font: font,
+  					size: text.size,
+  					height: text.height,
+  					curveSegments: text.curveSegments,
+  					bevelThickness: text.bevelThickness,
+  					bevelSize: text.bevelSize,
+  					bevelEnabled: text.bevelEnabled
+  				} )
+  	// textGeo.computeBoundingBox()
+  	// textGeo.computeVertexNormals()
+  	textMesh.push(new THREE.Mesh( textGeo,  new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } ) ))
+    textGroup[t].add(textMesh[t])
 
-  // scene.add( object );
+    // let's center
+    let textBox3 = new THREE.Box3().setFromObject( textMesh[t] )
+    textBox3.getCenter( textMesh[t].position )
+    textMesh[t].position.multiplyScalar( - 1 )
+
+    // let's make the hover box
+    let textBox3Size = new THREE.Vector3()
+    textBox3.getSize(textBox3Size)
+    let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
+    textHoverBox.push(new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:false, visible:false })))
+    textGroup[t].add(textHoverBox[t])
+    objectsForRayCasting.push(textHoverBox[t])
+
+    textGroup[t].name = t
+    textGroup[t].position.y = - 4 + Math.random()*8
+    textGroup[t].rotation.y += - 1 + Math.random()
+  }
+
 }
 
 // let's make a sphere
@@ -268,6 +277,7 @@ window.addEventListener( 'touchmove', onTouchMove, false)
 function objectHover_on(o) {
   if ( o.parent.type === "Group" ) {
     // gruppo
+    console.log(o.parent.name)
     for (j = 0; j < o.parent.children.length; j++) {
       o.parent.children[j].material.emissive.setHex( cAttivo )
     }
@@ -278,14 +288,14 @@ function objectHover_on(o) {
 }
 
 function objectHover_off(o) {
-  if ( o.parent.type !== "Group" ) {
-    // oggetto
-    o.material.emissive.setHex( cPassivo )
-  } else {
+  if ( o.parent.type === "Group" ) {
     // gruppo
     for (j = 0; j < o.parent.children.length; j++) {
       o.parent.children[j].material.emissive.setHex( cPassivo )
     }
+  } else {
+    // oggetto
+    o.material.emissive.setHex( cPassivo )
   }
 }
 
