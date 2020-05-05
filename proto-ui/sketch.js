@@ -211,10 +211,18 @@ let render = function() {
     pitch = gimbal.pitch
   }
   // tilt camera 2
-  target.x = ( 1 - roll/*mouse.x*/ ) * 0.01
-  target.y = ( 1 - pitch/*mouse.y*/ ) * 0.01
-  camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
-  camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
+  target.x = ( 1 - mouse.x ) * 0.001
+  target.y = ( 1 - mouse.y ) * 0.001
+  if (gimbal.yaw) {
+    roll = gimbal.roll
+    yaw =  gimbal.yaw
+    pitch = gimbal.pitch
+    camera.rotation.x = roll
+    gamera.rotation.y = pitch
+  } else {
+    camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
+    camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
+  }
 
   renderer.render(scene, camera)
   // time += 0.015
@@ -267,6 +275,8 @@ function onTouchMove( event ) {
 function onWindowResize() {
   windowHalf.set( window.innerWidth / 2, window.innerHeight / 2 );
   camera.aspect = window.innerWidth / window.innerHeight
+  cam.left = -camera.aspect * 10;
+  cam.right = camera.aspect * 10;
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
 }
