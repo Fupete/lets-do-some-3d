@@ -206,8 +206,8 @@ let render = function() {
     roll = 0
     yaw = 0
   }
-  camera.position.x = ( mouse.x - camera.position.x ) * .005 + roll
-	camera.position.y = ( - mouse.y - camera.position.y ) * .005 + yaw
+  camera.position.x = ( mouse.x - camera.position.x ) * .005 + roll * .5
+	camera.position.y = ( - mouse.y - camera.position.y ) * .005 - yaw * .5
 	camera.lookAt( scene.position )
 
   renderer.render(scene, camera)
