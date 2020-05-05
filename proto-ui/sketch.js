@@ -198,9 +198,9 @@ let render = function() {
   requestAnimationFrame(render)
 
   // tilt camera
-  camera.rotation.x = -gimbal.pitch*0.3
-  camera.rotation.y = -gimbal.yaw*0.3
-  camera.rotation.z = -gimbal.roll*0.3
+  camera.position.x = -gimbal.pitch*0.3
+  camera.position.y = -gimbal.yaw*0.3
+  camera.position.z = -gimbal.roll*0.3
   // camera.quaternion.copy(gimbal.quaternion)
   // camera.position.x = ( mouse.x - camera.position.x ) * .005
 	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
