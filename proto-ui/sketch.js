@@ -190,6 +190,7 @@ function objectHover_off(o) {
 
 let cAttivo =  "0x00ff00"
 let cPassivo = "0xffffff"
+let yaw, roll
 
 // set
 let time = 0
@@ -198,7 +199,6 @@ let render = function() {
   requestAnimationFrame(render)
 
   // tilt camera
-  let yaw, roll
   if (gimbal.yaw) {
     roll = gimbal.roll
     yaw =  gimbal.yaw
