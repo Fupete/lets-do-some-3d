@@ -217,8 +217,8 @@ let render = function() {
     roll = gimbal.roll
     yaw =  gimbal.yaw
     pitch = gimbal.pitch
-    camera.rotation.x = roll
-    gamera.rotation.y = pitch
+    camera.rotation.x += 0.25 * roll
+    camera.rotation.y += 0.25 * pitch
   } else {
     camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
     camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
