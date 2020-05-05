@@ -266,7 +266,7 @@ function onTouchMove( event ) {
 window.addEventListener( 'touchmove', onTouchMove, false)
 
 function objectHover_on(o) {
-  if ( o.parent == textGroup ) {
+  if ( o.parent.type === "Group" ) {
     // gruppo
     for (j = 0; j < o.parent.children.length; j++) {
       o.parent.children[j].material.emissive.setHex( cAttivo )
@@ -278,11 +278,11 @@ function objectHover_on(o) {
 }
 
 function objectHover_off(o) {
-  if ( o.parent != textGroup ) {
-    // gruppo
+  if ( o.parent.type !== "Group" ) {
+    // oggetto
     o.material.emissive.setHex( cPassivo )
   } else {
-    // oggetto
+    // gruppo
     for (j = 0; j < o.parent.children.length; j++) {
       o.parent.children[j].material.emissive.setHex( cPassivo )
     }
