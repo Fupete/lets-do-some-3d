@@ -191,6 +191,7 @@ function objectHover_off(o) {
 let cAttivo =  "0x00ff00"
 let cPassivo = "0xffffff"
 let yaw = 0, roll = 0, pitch = 0
+gimbal.recalibrate()
 
 // set
 let time = 0
@@ -198,16 +199,22 @@ let render = function() {
   gimbal.update()
   requestAnimationFrame(render)
 
+  // tilt camera 1
+  // camera.position.x = ( mouse.x - camera.position.x ) * .005
+	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
+	// camera.lookAt( scene.position )
+
   // tilt camera
   if (gimbal.yaw) {
     roll = gimbal.roll
     yaw =  gimbal.yaw
     pitch = gimbal.pitch
   }
-  camera.position.x = ( mouse.x - camera.position.x ) * .005 + pitch
-	camera.position.y = ( - mouse.y - camera.position.y ) * .005 - yaw
-  camera.position.z = roll
-	camera.lookAt( scene.position )
+  // tilt camera 2
+  target.x = ( 1 - roll/*mouse.x*/ ) * 0.01
+  target.y = ( 1 - pitch/*mouse.y*/ ) * 0.01
+  camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
+  camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
 
   renderer.render(scene, camera)
   // time += 0.015
