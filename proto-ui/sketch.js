@@ -160,6 +160,81 @@ sphere1.position.z = -2
 // controls.target.set(0, 0, 0)
 camera.position.set(0, 0, 7)
 
+/////////
+///////// RENDER/ANIMATION LOOP
+/////////
+
+let cAttivo =  "0x00ff00"
+let cPassivo = "0xffffff"
+if (gimbal.yaw) gimbal.recalibrate()
+
+// set
+let time = 0
+let render = function() {
+  gimbal.update()
+  requestAnimationFrame(render)
+
+  // tilt camera 1
+  // camera.position.x = ( mouse.x - camera.position.x ) * .005
+	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
+	// camera.lookAt( scene.position )
+
+  // gimbal for device orientation
+  if (gimbal.yaw) {
+    camera.rotation.x = 0.25 * - gimbal.pitch
+    camera.rotation.y = 0.25 * - gimbal.yaw
+  } else {
+    // tilt camera 2
+    target.x = ( 1 - mouse.x ) * 0.001
+    target.y = ( 1 - mouse.y ) * 0.001
+    camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
+    camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
+  }
+
+  renderer.render(scene, camera)
+  // time += 0.015
+}
+
+// go
+render()
+
+/////////
+///////// EVENTS
+/////////
+
+function onMouseMove( event ) {
+  // mouse camera
+	mouse.x = ( event.clientX - windowHalf.x )
+	mouse.y = ( event.clientY - windowHalf.y )
+  // mouse raycasting
+  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
+	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
+
+  // mouse raycasting, find intersections
+  raycaster.setFromCamera( mouseRAY, camera )
+  let intersects = raycaster.intersectObjects( objectsForRayCasting )
+  if ( intersects[0]) {
+    if ( SEL != intersects[ 0 ].object ) {
+      if ( SEL ) objectHover_off(SEL)
+      SEL = intersects[0].object
+      objectHover_on(SEL)
+    }
+  } else {
+    if ( SEL ) objectHover_off(SEL)
+    SEL = null
+  }
+}
+window.addEventListener( 'mousemove', onMouseMove, false )
+
+function onTouchMove( event ) {
+    event.preventDefault()
+    // touch camera
+    event.clientX = event.changedTouches[0].pageX
+    event.clientY = event.changedTouches[0].pageY
+    onMouseMove( event )
+}
+window.addEventListener( 'touchmove', onTouchMove, false)
+
 function objectHover_on(o) {
   if ( o.parent == textGroup ) {
     // gruppo
@@ -184,94 +259,6 @@ function objectHover_off(o) {
   }
 }
 
-/////////
-///////// RENDER/ANIMATION LOOP
-/////////
-
-let cAttivo =  "0x00ff00"
-let cPassivo = "0xffffff"
-let yaw = 0, roll = 0, pitch = 0
-gimbal.recalibrate()
-
-// set
-let time = 0
-let render = function() {
-  gimbal.update()
-  requestAnimationFrame(render)
-
-  // tilt camera 1
-  // camera.position.x = ( mouse.x - camera.position.x ) * .005
-	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
-	// camera.lookAt( scene.position )
-
-  // tilt camera
-  if (gimbal.yaw) {
-    roll = gimbal.roll
-    yaw =  gimbal.yaw
-    pitch = gimbal.pitch
-  }
-  // tilt camera 2
-  target.x = ( 1 - mouse.x ) * 0.001
-  target.y = ( 1 - mouse.y ) * 0.001
-  if (gimbal.yaw) {
-    roll = gimbal.roll
-    yaw =  gimbal.yaw
-    pitch = gimbal.pitch
-    camera.rotation.x = 0.25 * - pitch
-    camera.rotation.y = 0.25 * - yaw
-  } else {
-    camera.rotation.x += 0.05 * ( target.y - camera.rotation.x )
-    camera.rotation.y += 0.05 * ( target.x - camera.rotation.y )
-  }
-
-  renderer.render(scene, camera)
-  // time += 0.015
-}
-
-// go
-render()
-
-/////////
-///////// EVENTS
-/////////
-
-// Add listener for window resize.
-window.addEventListener('resize', onWindowResize, false)
-
-
-window.addEventListener( 'mousemove', onMouseMove, false )
-function onMouseMove( event ) {
-  // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
-  // mouse raycasting
-  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
-	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
-
-  // mouse raycasting, find intersections
-  raycaster.setFromCamera( mouseRAY, camera )
-  let intersects = raycaster.intersectObjects( objectsForRayCasting )
-  if ( intersects[0]) {
-    if ( SEL != intersects[ 0 ].object ) {
-      if ( SEL ) objectHover_off(SEL)
-      SEL = intersects[0].object
-      objectHover_on(SEL)
-    }
-  } else {
-    if ( SEL ) objectHover_off(SEL)
-    SEL = null
-  }
-}
-
-window.addEventListener( 'touchmove', onTouchMove, false)
-function onTouchMove( event ) {
-    event.preventDefault()
-    // touch camera
-    event.clientX = event.changedTouches[0].pageX
-    event.clientY = event.changedTouches[0].pageY
-    onMouseMove( event )
-}
-
 function onWindowResize() {
   windowHalf.set( window.innerWidth / 2, window.innerHeight / 2 );
   camera.aspect = window.innerWidth / window.innerHeight
@@ -280,3 +267,4 @@ function onWindowResize() {
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
 }
+window.addEventListener('resize', onWindowResize, false)
