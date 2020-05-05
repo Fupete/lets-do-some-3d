@@ -36,18 +36,6 @@ let text = {
   wireframe: false
 }
 
-// mouse raycasting
-let mouseRAY = new THREE.Vector2(), SEL
-let objectsForRayCasting = []
-
-// mouse camera
-let mouse = new THREE.Vector2()
-const target = new THREE.Vector2()
-let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 )
-
-// Raycaster
-let raycaster = new THREE.Raycaster()
-
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x212121)
@@ -67,6 +55,19 @@ if (pRatio > 2) pRatio = 2 // < not too much on mobile...
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(renderer.domElement)
+
+// device orientation camera
+let controls = new THREE.DeviceOrientationControls( camera );
+
+// mouse camera
+let mouse = new THREE.Vector2()
+const target = new THREE.Vector2()
+let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 )
+
+// mouse/touch raycasting
+let mouseRAY = new THREE.Vector2(), SEL
+let objectsForRayCasting = []
+let raycaster = new THREE.Raycaster()
 
 /////////
 ///////// LIGHTS
@@ -192,9 +193,10 @@ let cPassivo = "0xffffff"
 // set
 let time = 0
 let render = function() {
+    controls.update()
   requestAnimationFrame(render)
 
-  // tilt camera 
+  // tilt camera
   camera.position.x = ( mouse.x - camera.position.x ) * .005
 	camera.position.y = ( - mouse.y - camera.position.y ) * .005
 	camera.lookAt( scene.position )
