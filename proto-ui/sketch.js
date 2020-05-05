@@ -56,8 +56,9 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.outputEncoding = THREE.sRGBEncoding;
 document.body.appendChild(renderer.domElement)
 
-// device orientation camera
-let controls = new THREE.DeviceOrientationControls( camera );
+// gimbal...
+let gimbal = new Gimbal()
+gimbal.enable()
 
 // mouse camera
 let mouse = new THREE.Vector2()
@@ -193,13 +194,17 @@ let cPassivo = "0xffffff"
 // set
 let time = 0
 let render = function() {
-  controls.update()
+  gimbal.update()
   requestAnimationFrame(render)
 
   // tilt camera
-  // camera.position.x = ( mouse.x - camera.position.x ) * .005
-	// camera.position.y = ( - mouse.y - camera.position.y ) * .005
-	// camera.lookAt( scene.position )
+  camera.rotation.x = gimbal.pitch
+  arrowPitch.rotation.y = gimbal.yaw
+  camera.rotation.z = gimbal.roll
+  // camera.quaternion.copy(gimbal.quaternion)
+  camera.position.x = ( mouse.x - camera.position.x ) * .005
+	camera.position.y = ( - mouse.y - camera.position.y ) * .005
+	camera.lookAt( scene.position )
 
   renderer.render(scene, camera)
   // time += 0.015
