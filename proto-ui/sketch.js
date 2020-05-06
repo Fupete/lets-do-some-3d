@@ -36,20 +36,20 @@ textes.push("NASONERO")
 textes.push("TELLER+K")
 
 let text = {
-  height: 2,
+  height: 0,
   size: 1,
   hover: 0,
 	curveSegments: 7,
   bevelThickness: 0.05,
   bevelSize: 0.05,
-  bevelEnabled: true,
-  wireframe: true
+  bevelEnabled: false,
+  wireframe: false
 }
 
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
-scene.fog = new THREE.FogExp2(scene.background, .05)
+// scene.fog = new THREE.FogExp2(scene.background, .1)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
@@ -157,7 +157,7 @@ function createText() {
     let textBox3Size = new THREE.Vector3()
     textBox3.getSize(textBox3Size)
     let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
-    textHoverBox.push(new THREE.Mesh(textBoxGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe:true, visible:false })))
+    textHoverBox.push(new THREE.Mesh(textBoxGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe:false, visible:false })))
     textGroup[t].add(textHoverBox[t])
     objectsForRayCasting.push(textHoverBox[t])
 
@@ -170,14 +170,14 @@ function createText() {
 
 // let's make a sphere
 let geomSphere = new THREE.SphereGeometry( .5, 35, 35 )
-let sphere = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:true } ))
+let sphere = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:false } ))
 scene.add(sphere)
 objectsForRayCasting.push( sphere )
 sphere.position.x = 0
 sphere.position.y = 2
 sphere.position.z = 2
 
-let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:true } ))
+let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:false } ))
 scene.add(sphere1)
 objectsForRayCasting.push( sphere1 )
 sphere1.position.x = 2
@@ -239,8 +239,8 @@ render()
 
 function onMouseMove( event ) {
   // mouse camera
-	// mouse.x = ( event.clientX - windowHalf.x )
-	// mouse.y = ( event.clientY - windowHalf.y )
+	mouse.x = ( event.clientX - windowHalf.x )
+	mouse.y = ( event.clientY - windowHalf.y )
   // mouse raycasting
   mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
 	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
@@ -261,14 +261,14 @@ function onMouseMove( event ) {
 }
 window.addEventListener( 'mousemove', onMouseMove, false )
 
-// function onTouchMove( event ) {
-//     event.preventDefault()
-//     // touch camera
-//     event.clientX = event.changedTouches[0].pageX
-//     event.clientY = event.changedTouches[0].pageY
-//     onMouseMove( event )
-// }
-// window.addEventListener( 'touchmove', onTouchMove, false)
+function onTouchMove( event ) {
+    event.preventDefault()
+    // touch camera
+    event.clientX = event.changedTouches[0].pageX
+    event.clientY = event.changedTouches[0].pageY
+    onMouseMove( event )
+}
+window.addEventListener( 'touchmove', onTouchMove, false)
 
 let cAttivo =  "0x00ffff"
 let cPassivo = "0xffffff"
