@@ -43,13 +43,13 @@ let text = {
   bevelThickness: 0.05,
   bevelSize: 0.05,
   bevelEnabled: true,
-  wireframe: false
+  wireframe: true
 }
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color(0x212121)
-scene.fog = new THREE.FogExp2(scene.background, .1)
+scene.background = new THREE.Color(0x000000)
+scene.fog = new THREE.FogExp2(scene.background, .05)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
@@ -58,14 +58,12 @@ const camera = new THREE.PerspectiveCamera(60, aspect, near, far)
 // Renderer
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
-  powerPreference: "high-performance"
+  // powerPreference: "high-performance"
 })
 let pRatio = window.devicePixelRatio
 if (pRatio > 2) pRatio = 2 // < not more than 2...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.gammaFactor = 2.2
-renderer.gammaOutput = true
 renderer.outputEncoding = THREE.sRGBEncoding
 document.body.appendChild(renderer.domElement)
 
@@ -99,13 +97,13 @@ let raycaster = new THREE.Raycaster()
 ///////// LIGHTS
 /////////
 
-let lightAmb = new THREE.AmbientLight(0xFFFFFF)
-scene.add(lightAmb)
+// let lightAmb = new THREE.AmbientLight(0xFFFFFF)
+// scene.add(lightAmb)
 
-let dirLight = new THREE.DirectionalLight( 0xffffff, 4 );
-dirLight.color.setHSL( 0.1, 1, 1 );
-dirLight.position.set( - 1, 1.75, 3 );
-scene.add( dirLight );
+// let dirLight = new THREE.DirectionalLight( 0xffffff, 4 );
+// dirLight.color.setHSL( 0.1, 1, 1 );
+// dirLight.position.set( - 1, 1.75, 3 );
+// scene.add( dirLight );
 // dirLightHeper = new THREE.DirectionalLightHelper( dirLight, 10 );
 // scene.add( dirLightHeper );
 
@@ -147,7 +145,7 @@ function createText() {
   				} )
   	// textGeo.computeBoundingBox()
   	// textGeo.computeVertexNormals()
-  	textMesh.push(new THREE.Mesh( textGeo,  new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:text.wireframe } ) ))
+  	textMesh.push(new THREE.Mesh( textGeo,  new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:text.wireframe } ) ))
     textGroup[t].add(textMesh[t])
 
     // let's center
@@ -159,7 +157,7 @@ function createText() {
     let textBox3Size = new THREE.Vector3()
     textBox3.getSize(textBox3Size)
     let textBoxGeo = new THREE.BoxGeometry(textBox3Size.x, textBox3Size.y, textBox3Size.z)
-    textHoverBox.push(new THREE.Mesh(textBoxGeo, new THREE.MeshPhongMaterial({ color: 0x000000, wireframe:false, visible:false })))
+    textHoverBox.push(new THREE.Mesh(textBoxGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe:true, visible:false })))
     textGroup[t].add(textHoverBox[t])
     objectsForRayCasting.push(textHoverBox[t])
 
@@ -172,14 +170,14 @@ function createText() {
 
 // let's make a sphere
 let geomSphere = new THREE.SphereGeometry( .5, 35, 35 )
-let sphere = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:false } ))
+let sphere = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:true } ))
 scene.add(sphere)
 objectsForRayCasting.push( sphere )
 sphere.position.x = 0
 sphere.position.y = 2
 sphere.position.z = 2
 
-let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshPhongMaterial( { color: 0x000000, wireframe:false } ))
+let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:true } ))
 scene.add(sphere1)
 objectsForRayCasting.push( sphere1 )
 sphere1.position.x = 2
@@ -241,8 +239,8 @@ render()
 
 function onMouseMove( event ) {
   // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
+	// mouse.x = ( event.clientX - windowHalf.x )
+	// mouse.y = ( event.clientY - windowHalf.y )
   // mouse raycasting
   mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
 	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
@@ -263,41 +261,31 @@ function onMouseMove( event ) {
 }
 window.addEventListener( 'mousemove', onMouseMove, false )
 
-function onTouchMove( event ) {
-    event.preventDefault()
-    // touch camera
-    event.clientX = event.changedTouches[0].pageX
-    event.clientY = event.changedTouches[0].pageY
-    onMouseMove( event )
-}
-window.addEventListener( 'touchmove', onTouchMove, false)
+// function onTouchMove( event ) {
+//     event.preventDefault()
+//     // touch camera
+//     event.clientX = event.changedTouches[0].pageX
+//     event.clientY = event.changedTouches[0].pageY
+//     onMouseMove( event )
+// }
+// window.addEventListener( 'touchmove', onTouchMove, false)
 
 let cAttivo =  "0x00ffff"
-let cPassivo = "0x000000"
+let cPassivo = "0xffffff"
 
 function objectHover_on(o) {
   if ( o.parent.type === "Group" ) {
-    // gruppo
-    console.log(o.parent.name)
-    for (j = 0; j < o.parent.children.length; j++) {
-      o.parent.children[j].material.emissive.setHex( cAttivo )
-    }
-  } else {
-    // oggetto
-    o.material.emissive.setHex( cAttivo )
-  }
+    // console.log(o.parent.name)
+    for (let children of o.parent.children)
+      children.material.color.setHex( cAttivo )
+  } else o.material.color.setHex( cAttivo )
 }
 
 function objectHover_off(o) {
   if ( o.parent.type === "Group" ) {
-    // gruppo
-    for (j = 0; j < o.parent.children.length; j++) {
-      o.parent.children[j].material.emissive.setHex( cPassivo )
-    }
-  } else {
-    // oggetto
-    o.material.emissive.setHex( cPassivo )
-  }
+    for (let children of o.parent.children)
+      children.material.color.setHex( cPassivo )
+  } else o.material.color.setHex( cPassivo )
 }
 
 function onWindowResize() {
