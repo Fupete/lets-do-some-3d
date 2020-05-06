@@ -19,14 +19,20 @@
 
 -----
 
-_I know, I am still a beginner with tools like webgl, three js, blender... and that's what I love about it: continuing to learn new things is a way to nirvana these days :-)_
+_I know, I am a beginner with tools like webgl, three js, blender... and that's what I love about it: continuing to learn new things, and dream eyes wide open new futures, is my way to nirvana :-). Ok, now it's time to take a walk in the woods, c u soon_
 
 ## 2020
 _Right now_
 
+**[proto-ui &rarr;](./proto-ui)**
+
+Just researching in 3d/responsive/touch ui for my upcoming new web portfolio. An experiment to understand approaches and tech. Disclaimer: like everything here it is pretty buggy, I said.
+
+![thumb](./proto-ui/proto-ui.png)
+
 **[project-lazarus &rarr;](./project-lazarus)**
 
-_Work in progress... still a lot to do!_ My 1st low-poly robot in blender. I'm currently trying to make it walk, run, dance... will follow the attempt of controlling it in three.js. Let's see. I will keep u posted, take care, stay safe, cultivate freedom and imagination.
+My 1st low-poly robo' designed and rigged in blender. My 1st attempt of a controlled character in the browser via three.js skinning animation.
 
 ![thumb](./project-lazarus/project-lazarus.png)
 

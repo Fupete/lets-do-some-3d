@@ -13,4 +13,4 @@
 // Three js experiments and sandbox
 //
 ```
-_work in progress_
+![thumbnail](./proto-ui.png)
