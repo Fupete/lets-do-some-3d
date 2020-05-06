@@ -36,24 +36,24 @@ textes.push("NASONERO")
 textes.push("TELLER+K")
 
 let text = {
-  height: 0,
+  height: .1,
   size: 1,
   hover: 0,
 	curveSegments: 7,
   bevelThickness: 0.05,
   bevelSize: 0.05,
-  bevelEnabled: false,
+  bevelEnabled: true,
   wireframe: false
 }
 
 // Scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
-// scene.fog = new THREE.FogExp2(scene.background, .1)
+// scene.fog = new THREE.FogExp2(0x999999, .05)
 
 // Camera
 let aspect = window.innerWidth / window.innerHeight
-const camera = new THREE.PerspectiveCamera(60, aspect, near, far)
+const camera = new THREE.PerspectiveCamera(75, aspect, near, far)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -61,7 +61,7 @@ const renderer = new THREE.WebGLRenderer({
   // powerPreference: "high-performance"
 })
 let pRatio = window.devicePixelRatio
-if (pRatio > 2) pRatio = 2 // < not more than 2...
+// if (pRatio > 2) pRatio = 2 // < not more than 2...
 renderer.setPixelRatio(pRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.outputEncoding = THREE.sRGBEncoding
@@ -73,11 +73,11 @@ controls.enablePan = false
 controls.enableDamping = true
 controls.dampingFactor = 0.19
 controls.minDistance = 4
-controls.maxDistance = 11
+controls.maxDistance = 14
 controls.maxPolarAngle = Math.PI
 controls.minPolarAngle = - Math.PI
-controls.maxAzimuthAngle = Math.PI / 2
-controls.minAzimuthAngle = -Math.PI / 2
+// controls.maxAzimuthAngle = Math.PI / 2
+// controls.minAzimuthAngle = -Math.PI / 2
 
 // gimbal...
 // let gimbal = new Gimbal()
@@ -238,10 +238,10 @@ controls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 ///////// EVENTS
 /////////
 
-function onMouseMove( event ) {
-  // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
+let touchDrag = false
+let touchZoom = false
+
+function onMouseClick( event ) {
   // mouse raycasting
   mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
 	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
@@ -261,17 +261,47 @@ function onMouseMove( event ) {
   }
   renderer.render( scene, camera )
 }
+window.addEventListener( 'click', onMouseClick, true )
+
+function onTouchEnd( event ) {
+  event.preventDefault()
+  if (!touchDrag && !touchZoom) {
+    // touch camera
+    event.clientX = event.changedTouches[0].pageX
+    event.clientY = event.changedTouches[0].pageY
+    // se tap vai a click sennò vai a move...
+    onMouseClick( event )
+  }
+  }
+window.addEventListener( 'touchend', onTouchEnd, true )
+
+function onTouchStart( event ) {
+  event.preventDefault()
+  if (event.touches.length > 1) {
+    touchZoom = true
+  } if (event.touches.length == 1) {
+    touchDrag = false
+    touchZoom = false
+  }
+}
+window.addEventListener( 'touchstart', onTouchStart, true)
+
+function onMouseMove( event ) {
+  // mouse camera
+	mouse.x = ( event.clientX - windowHalf.x )
+	mouse.y = ( event.clientY - windowHalf.y )
+}
 window.addEventListener( 'mousemove', onMouseMove, true )
 
 function onTouchMove( event ) {
     event.preventDefault()
-    // touch camera
-    event.clientX = event.changedTouches[0].pageX
-    event.clientY = event.changedTouches[0].pageY
-    onMouseMove( event )
+    touchDrag = true
+    // // touch camera
+    // event.clientX = event.changedTouches[0].pageX
+    // event.clientY = event.changedTouches[0].pageY
+    // onMouseMove( event )
 }
 window.addEventListener( 'touchmove', onTouchMove, true)
-window.addEventListener( 'touchstart', onTouchMove, true)
 
 let cAttivo =  "0x00ffff"
 let cPassivo = "0xffffff"
