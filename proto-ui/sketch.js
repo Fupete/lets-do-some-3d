@@ -240,40 +240,12 @@ controls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 
 let touchDrag = false
 let touchZoom = false
+let mouseDrag = false
 
-function onMouseClick( event ) {
-  // mouse raycasting
-  mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
-	mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
-
-  // mouse raycasting, find intersections
-  raycaster.setFromCamera( mouseRAY, camera )
-  let intersects = raycaster.intersectObjects( objectsForRayCasting )
-  if ( intersects[0]) {
-    if ( SEL != intersects[ 0 ].object ) {
-      if ( SEL ) objectHover_off(SEL)
-      SEL = intersects[0].object
-      objectHover_on(SEL)
-    }
-  } else {
-    if ( SEL ) objectHover_off(SEL)
-    SEL = null
-  }
-  renderer.render( scene, camera )
+function onMouseDown( event ) {
+  mouseDrag = false
 }
-window.addEventListener( 'click', onMouseClick, true )
-
-function onTouchEnd( event ) {
-  event.preventDefault()
-  if (!touchDrag && !touchZoom) {
-    // touch camera
-    event.clientX = event.changedTouches[0].pageX
-    event.clientY = event.changedTouches[0].pageY
-    // se tap vai a click sennò vai a move...
-    onMouseClick( event )
-  }
-  }
-window.addEventListener( 'touchend', onTouchEnd, true )
+window.addEventListener( 'mousedown', onMouseDown, true )
 
 function onTouchStart( event ) {
   event.preventDefault()
@@ -286,12 +258,46 @@ function onTouchStart( event ) {
 }
 window.addEventListener( 'touchstart', onTouchStart, true)
 
+function onTouchEnd( event ) {
+  event.preventDefault()
+  if (!touchDrag && !touchZoom && event.changedTouches[0]) {
+    // touch camera
+    event.clientX = event.changedTouches[0].pageX
+    event.clientY = event.changedTouches[0].pageY
+    // se tap vai a click sennò vai a move...
+    onMouseUp( event )
+  }
+}
+window.addEventListener( 'touchend', onTouchEnd, true )
+
 function onMouseMove( event ) {
-  // mouse camera
-	mouse.x = ( event.clientX - windowHalf.x )
-	mouse.y = ( event.clientY - windowHalf.y )
+  mouseDrag = true
 }
 window.addEventListener( 'mousemove', onMouseMove, true )
+
+function onMouseUp( event ) {
+  if (!mouseDrag) {
+    // mouse raycasting
+    mouseRAY.x = ( event.clientX / window.innerWidth ) * 2 - 1
+    mouseRAY.y = 1 - ( event.clientY / window.innerHeight ) * 2
+
+    // mouse raycasting, find intersections
+    raycaster.setFromCamera( mouseRAY, camera )
+    let intersects = raycaster.intersectObjects( objectsForRayCasting )
+    if ( intersects[0]) {
+      if ( SEL != intersects[ 0 ].object ) {
+        if ( SEL ) objectHover_off(SEL)
+        SEL = intersects[0].object
+        objectHover_on(SEL)
+      }
+    } else {
+      if ( SEL ) objectHover_off(SEL)
+      SEL = null
+    }
+    renderer.render( scene, camera )
+  }
+}
+window.addEventListener( 'mouseup', onMouseUp, true )
 
 function onTouchMove( event ) {
     event.preventDefault()
@@ -308,10 +314,13 @@ let cPassivo = "0xffffff"
 
 function objectHover_on(o) {
   if ( o.parent.type === "Group" ) {
-    // console.log(o.parent.name)
     for (let children of o.parent.children)
       children.material.color.setHex( cAttivo )
   } else o.material.color.setHex( cAttivo )
+  let t = new THREE.Vector3()
+  o.getWorldPosition(t)
+  controls.saveState()
+  controls.target.set(t.x,t.y,t.z)
 }
 
 function objectHover_off(o) {
@@ -319,6 +328,7 @@ function objectHover_off(o) {
     for (let children of o.parent.children)
       children.material.color.setHex( cPassivo )
   } else o.material.color.setHex( cPassivo )
+  controls.reset()
 }
 
 function onWindowResize() {
