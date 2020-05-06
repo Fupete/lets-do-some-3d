@@ -271,7 +271,7 @@ function onTouchMove( event ) {
     onMouseMove( event )
 }
 window.addEventListener( 'touchmove', onTouchMove, true)
-window.addEventListener( 'toucstart', onTouchMove, true)
+window.addEventListener( 'touchstart', onTouchMove, true)
 
 let cAttivo =  "0x00ffff"
 let cPassivo = "0xffffff"
