@@ -166,6 +166,8 @@ function createText() {
     textGroup[t].rotation.y += - 1 + Math.random()
   }
 
+  renderer.render(scene, camera)
+
 }
 
 // let's make a sphere
@@ -225,13 +227,13 @@ let render = function() {
 
   stats.end()
   requestAnimationFrame(render)
-  renderer.render(scene, camera)
+  // renderer.render(scene, camera)
   // time += 0.015
 }
-// OrbitControls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 
 // go
 render()
+// controls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 
 /////////
 ///////// EVENTS
@@ -258,6 +260,7 @@ function onMouseMove( event ) {
     if ( SEL ) objectHover_off(SEL)
     SEL = null
   }
+  renderer.render( scene, camera )
 }
 window.addEventListener( 'mousemove', onMouseMove, true )
 
@@ -269,6 +272,7 @@ function onTouchMove( event ) {
     onMouseMove( event )
 }
 window.addEventListener( 'touchmove', onTouchMove, true)
+window.addEventListener( 'toucstart', onTouchMove, true)
 
 let cAttivo =  "0x00ffff"
 let cPassivo = "0xffffff"
