@@ -19,7 +19,7 @@
 
 -----
 
-_I know, I am a beginner with tools like webgl, three js, blender... and that's what I love about it: continuing to learn new things, and dream eyes wide open new futures, is my way to nirvana :-). Ok, now it's time to take a walk in the woods, c u soon_
+_I know, I am a beginner with 3d and tools like webgl, three js, blender... and that's what I love about it: continuing to learn new things, and dream eyes wide open new futures, is my way to nirvana :-). Ok, now it's time to take a walk in the woods. I will keep u posted, take care, stay safe, cultivate freedom and imagination. C u soon_
 
 ## 2020
 _Right now_
