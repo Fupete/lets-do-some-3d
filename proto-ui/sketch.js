@@ -262,7 +262,7 @@ function onMouseMove( event ) {
 window.addEventListener( 'mousemove', onMouseMove, false )
 
 function onTouchMove( event ) {
-    event.preventDefault()
+    // event.preventDefault()
     // touch camera
     event.clientX = event.changedTouches[0].pageX
     event.clientY = event.changedTouches[0].pageY
