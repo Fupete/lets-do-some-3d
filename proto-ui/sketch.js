@@ -268,7 +268,7 @@ function onTouchMove( event ) {
     event.clientY = event.changedTouches[0].pageY
     onMouseMove( event )
 }
-window.addEventListener( 'touchmove', onTouchMove, false)
+window.addEventListener( 'touchmove', onTouchMove, true)
 
 let cAttivo =  "0x00ffff"
 let cPassivo = "0xffffff"
