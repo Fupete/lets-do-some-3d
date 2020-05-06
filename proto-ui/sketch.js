@@ -259,7 +259,7 @@ function onMouseMove( event ) {
     SEL = null
   }
 }
-window.addEventListener( 'mousemove', onMouseMove, false )
+window.addEventListener( 'mousemove', onMouseMove, true )
 
 function onTouchMove( event ) {
     // event.preventDefault()
