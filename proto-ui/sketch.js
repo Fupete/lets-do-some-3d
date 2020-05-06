@@ -170,21 +170,20 @@ function createText() {
 
 }
 
-// let's make a sphere
-let geomSphere = new THREE.SphereGeometry( .5, 35, 35 )
-let sphere = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:false } ))
-scene.add(sphere)
-objectsForRayCasting.push( sphere )
-sphere.position.x = 0
-sphere.position.y = 2
-sphere.position.z = 2
+// let's make some spheres
+let spheres = []
+let geomSphere = new THREE.SphereBufferGeometry( .5, 35, 35 )
+for (let s=0; s<23; s++) {
+  spheres.push(new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:false } )))
+  scene.add(spheres[s])
+  objectsForRayCasting.push( spheres[s] )
+  let scala = Math.random()
+  spheres[s].scale.set(scala, scala, scala  )
+  spheres[s].position.x = -3 + Math.random()*6
+  spheres[s].position.y = -3 + Math.random()*6
+  spheres[s].position.z = -3 + Math.random()*6
+}
 
-let sphere1 = new THREE.Mesh(geomSphere, new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe:false } ))
-scene.add(sphere1)
-objectsForRayCasting.push( sphere1 )
-sphere1.position.x = 2
-sphere1.position.y = 2
-sphere1.position.z = -2
 
 
 /////////
@@ -233,7 +232,7 @@ let render = function() {
 
 // go
 render()
-// controls.addEventListener( 'change', () => renderer.render( scene, camera ) )
+controls.addEventListener( 'change', () => renderer.render( scene, camera ) )
 
 /////////
 ///////// EVENTS
@@ -265,7 +264,7 @@ function onMouseMove( event ) {
 window.addEventListener( 'mousemove', onMouseMove, true )
 
 function onTouchMove( event ) {
-    // event.preventDefault()
+    event.preventDefault()
     // touch camera
     event.clientX = event.changedTouches[0].pageX
     event.clientY = event.changedTouches[0].pageY
